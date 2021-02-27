@@ -5,41 +5,73 @@ using UnityEngine.Tilemaps;
 
 public class WorldGen : MonoBehaviour
 {
-    [SerializeField] int maxX = 255;
-    [SerializeField] int maxY = 255;
     [SerializeField] Tilemap foregroundTilemap;
+    [SerializeField] Tilemap backgroundTilemap;
     [SerializeField] BlockManager blockManager;
+    [SerializeField] BuildSystem buildSystem;
+
+    [SerializeField] int stonePercentage;
+    /// The type of block used on the lowest layer.
+
     public Block stoneBlock;
+    /// The type of block used on the middle layer.
     public Block dirtBlock;
+    /// The type of block used on the topmost layer.
     public Block grassBlock;
-    // Start is called before the first frame update
+
+    /// The terrain seed used.
+    public float worldSeed;
+    /// The "intensity" of the generated area's elevation changes
+    [SerializeField] float intensity = 10.0f;
+    ///Progress of the generator on the generation
+
+    public float progress = 0.0f;
+
     void Start()
     {
-        // TODO: use Mathf.PerlinNoise()
+        blockManager = GetComponent<BlockManager>();
+        buildSystem = GetComponent<BuildSystem>();
+
+        worldSeed = Random.Range(0.0f, 1000000.0f);
+        Generate(255, 255, worldSeed);
+    }
+
+    public void Generate(int maxX = 255, int maxY = 255, float generatorSeed = 0.0f) 
+    {
+        if(generatorSeed == 0.0f) {
+            generatorSeed = Random.Range(0.0f, 1000000.0f);
+        }
+
         dirtBlock = blockManager.allBlocks[0]; // TODO: Find a way to dynamically reserve certain blocks
         grassBlock = blockManager.allBlocks[1];
         stoneBlock = blockManager.allBlocks[2];
+
+        progress = 0.0f;
+        
         for (int xi = 0; xi < maxX; xi++) {
+            float x = (float)xi / 10;
+            float result = Mathf.PerlinNoise(x * intensity + generatorSeed, generatorSeed);
+            int height = Mathf.RoundToInt(result * maxY); // Gets the height of the column
+            int stoneHeight = Mathf.RoundToInt((float)height * ((float)stonePercentage / 100));
+
             for (int yi = 0; yi < maxY; yi++) {
                 Block toPlace;
-                if(yi < 30) {
+                if(yi < stoneHeight) {
                     toPlace = stoneBlock;
                 }
-                else if(yi < 40) {
+                else if(yi < height) {
                     toPlace = dirtBlock;
                 }
-                else if(yi == 40) {
+                else if(yi == height) {
                     toPlace = grassBlock;
                 }
                 else {
                     continue;
                 }
 
-                BlockTile newTile = BlockTile.CreateInstance<BlockTile>();
-                newTile.sourceBlock = toPlace;
-                newTile.sprite = toPlace.blockSprite;
-                newTile.name = toPlace.blockName;
-                foregroundTilemap.SetTile(new Vector3Int(xi, yi, 0), newTile);
+                buildSystem.PlaceBlockCell(toPlace, true, new Vector2(xi, yi));
+                buildSystem.PlaceBlockCell(toPlace, false, new Vector2(xi, yi));
+                //progress += 1.0f / ((float)maxX + (float)maxY); // Add progress to the progress var
             }
         }
     }

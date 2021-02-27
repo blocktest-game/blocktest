@@ -19,7 +19,7 @@ public class BlockManager : MonoBehaviour {
     [SerializeField] Dropdown selectionDropdown;
 
 
-    private void Start()
+    private void Awake()
     {
         // Initialise allBlocks array.
         allBlocks = new Block[allBlockTypes.Length];

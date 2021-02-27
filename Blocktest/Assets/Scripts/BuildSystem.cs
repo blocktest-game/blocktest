@@ -95,20 +95,23 @@ public class BuildSystem : MonoBehaviour
                 currentRenderer.color = new Color(0.5f, 1f, 0.5f, 0.7f); // Otherwise, normal coloring
             }
 
-            if (canBuildForeground && Input.GetMouseButton(0))
-            {
-                PlaceBlock(currentBlock, true, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            }
-            if (canBuildBackground && Input.GetMouseButton(1))
-            {
-                PlaceBlock(currentBlock, false, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if (canBuildForeground && Input.GetMouseButton(0)) {
+                BuildBlock(currentBlock, true, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            } 
+            else if (canBuildBackground && Input.GetMouseButton(1)) {
+                BuildBlock(currentBlock, false, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
 
         }
 
-        if(!buildMode && Input.GetMouseButton(0))
+        if(!buildMode)
         {
-            BreakBlock(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if(Input.GetMouseButton(0)) {
+                BreakBlock(true, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            } else if(Input.GetMouseButton(1)) {
+                BreakBlock(false, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
+            
         }
 
     }
@@ -158,28 +161,95 @@ public class BuildSystem : MonoBehaviour
         }
     }
 
-    public void BreakBlock(Vector2 position)
+    public void BreakBlock(bool foreground, Vector2 position)
     {
         Vector3Int tilePosition = foregroundTilemap.WorldToCell(position);
-        if(foregroundTilemap.HasTile(tilePosition)) {
+        if(foreground && foregroundTilemap.HasTile(tilePosition)) {
             foregroundTilemap.SetTile(tilePosition, null);
-        } else if (backgroundTilemap.HasTile(tilePosition)) {
+        } else if (!foreground && backgroundTilemap.HasTile(tilePosition)) {
             backgroundTilemap.SetTile(tilePosition, null);
         }
     }
 
-    public void PlaceBlock(Block toPlace, bool foreground, Vector2 position)
+    //
+    // Summary:
+    //      The method called whenever a PLAYER places an object.
+    // Parameters:
+    //      toPlace:
+    //          The block type to place.
+    //      foreground:
+    //          Whether or not the block should be placed in the foreground.
+    //      position:
+    //          The position of the placed block (world coords)
+    private void BuildBlock(Block toPlace, bool foreground, Vector2 position)
     {
-        Vector3Int tilePosition = foregroundTilemap.WorldToCell(position);
+        audioSource.PlayOneShot(currentBlock.placeSound);
+        PlaceBlockWorld(toPlace, foreground, position);
+    }
+
+    //
+    // Summary:
+    //      The method called whenever a block is placed.
+    // Parameters:
+    //      toPlace:
+    //          The block type to place.
+    //      foreground:
+    //          Whether or not the block should be placed in the foreground.
+    //      position:
+    //          The position of the placed block
+    public void PlaceBlockWorld(Block toPlace, bool foreground, Vector2 position)
+    {
+        PlaceBlockCell(toPlace, foreground, foregroundTilemap.WorldToCell(position));
+    }
+
+    //
+    // Summary:
+    //      The method called whenever a block is placed.
+    // Parameters:
+    //      toPlace:
+    //          The block type to place.
+    //      foreground:
+    //          Whether or not the block should be placed in the foreground.
+    //      position:
+    //          The position of the placed block
+    public void PlaceBlockCell(Block toPlace, bool foreground, Vector3Int tilePosition)
+    {
         BlockTile newTile = BlockTile.CreateInstance<BlockTile>();
         newTile.sourceBlock = toPlace;
         newTile.sprite = toPlace.blockSprite;
         newTile.name = toPlace.blockName;
-        audioSource.PlayOneShot(currentBlock.placeSound);
 
         if(foreground) {
-            newTile.colliderType = Tile.ColliderType.Grid;
             Debug.Log(tilePosition);
+            newTile.colliderType = Tile.ColliderType.Grid;
+            foregroundTilemap.SetTile(tilePosition, newTile);
+        } else {
+            newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            backgroundTilemap.SetTile(tilePosition, newTile);
+        }
+    }
+
+    //
+    // Summary:
+    //      The method called whenever a block is placed.
+    // Parameters:
+    //      toPlace:
+    //          The block type to place.
+    //      foreground:
+    //          Whether or not the block should be placed in the foreground.
+    //      position:
+    //          The position of the placed block
+    public void PlaceBlockCell(Block toPlace, bool foreground, Vector2 position)
+    {
+        Vector3Int tilePosition = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
+        BlockTile newTile = BlockTile.CreateInstance<BlockTile>();
+        newTile.sourceBlock = toPlace;
+        newTile.sprite = toPlace.blockSprite;
+        newTile.name = toPlace.blockName;
+
+        if(foreground) {
+            Debug.Log(tilePosition);
+            newTile.colliderType = Tile.ColliderType.Grid;
             foregroundTilemap.SetTile(tilePosition, newTile);
         } else {
             newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
