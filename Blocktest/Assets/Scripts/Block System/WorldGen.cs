@@ -23,9 +23,11 @@ public class WorldGen : MonoBehaviour
     public float worldSeed;
     /// The "intensity" of the generated area's elevation changes
     [SerializeField] float intensity = 10.0f;
-    ///Progress of the generator on the generation
+    /// Progress of the generator on the generation
 
     public float progress = 0.0f;
+    /// The spawn platform.
+    [SerializeField] GameObject spawnPlatform;
 
     void Start()
     {
@@ -64,6 +66,10 @@ public class WorldGen : MonoBehaviour
                 }
                 else if(yi == height) {
                     toPlace = grassBlock;
+                    if(xi == Mathf.RoundToInt(maxX / 2)) {
+                        spawnPlatform.transform.position = foregroundTilemap.CellToWorld(new Vector3Int(xi, yi + 1, 0));
+                        GameObject.Find("Player").transform.position = foregroundTilemap.CellToWorld(new Vector3Int(xi, yi + 5, 0));
+                    }
                 }
                 else {
                     continue;

@@ -122,6 +122,7 @@ public class PlayerUI : MonoBehaviour
         blockCursor = new GameObject("BlockCursor");
         currentRenderer = blockCursor.AddComponent<SpriteRenderer>();
         audioSource = blockCursor.AddComponent<AudioSource>();
+        currentRenderer.sortingOrder = 10;
         if(!buildMode) {
             currentRenderer.sprite = destroySprite;
         }
