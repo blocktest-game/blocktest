@@ -1002,6 +1002,7 @@ GameObject:
   - component: {fileID: 1372863296}
   - component: {fileID: 1372863295}
   - component: {fileID: 1372863297}
+  - component: {fileID: 1372863299}
   - component: {fileID: 1372863298}
   m_Layer: 0
   m_Name: BlockSystem
@@ -1075,13 +1076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679497365779dc948b3948c62a751aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 1910288999}
-  destroySprite: {fileID: 21300000, guid: b9976b73dc5aa3049a6d2f50ba07925d, type: 3}
-  buildMode: 1
-  maxBuildDistance: 5
   foregroundTilemap: {fileID: 1983780303}
   backgroundTilemap: {fileID: 1505424472}
-  selectionDropdown: {fileID: 2088312332}
 --- !u!114 &1372863298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1094,14 +1090,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab84c82fc623914fb6b04ce997147e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxX: 255
-  maxY: 255
   foregroundTilemap: {fileID: 1983780303}
   backgroundTilemap: {fileID: 1505424472}
   blockManager: {fileID: 1372863295}
+  buildSystem: {fileID: 0}
   stonePercentage: 70
-  generatorSeed: 0
-  intensity: 10
+  worldSeed: 0
+  intensity: 0.1
+  progress: 0
+--- !u!114 &1372863299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372863294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad7324d567aab44392b37c53b1a5eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 1910288999}
+  destroySprite: {fileID: 0}
+  buildMode: 0
+  maxBuildDistance: 5
+  selectionDropdown: {fileID: 2088312332}
+  foregroundTilemap: {fileID: 0}
+  backgroundTilemap: {fileID: 0}
 --- !u!1 &1505424469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,7 +1831,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  perlinNoise: 0
 --- !u!95 &1910289006
 Animator:
   serializedVersion: 3
@@ -2254,7 +2268,7 @@ GameObject:
   - component: {fileID: 2088312333}
   - component: {fileID: 2088312332}
   m_Layer: 5
-  m_Name: Selection
+  m_Name: Block Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
