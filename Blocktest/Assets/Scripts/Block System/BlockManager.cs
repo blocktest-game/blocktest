@@ -40,8 +40,7 @@ public class BlockManager : MonoBehaviour {
         {
             // Instead of referencing multiple arrays, we just create a new BlockType object and get values from that.
             BlockType newBlockType = allBlockTypes[i];
-            allBlocks[i] = new Block(i, newBlockType.blockName, newBlockType.blockSprite, newBlockType.placeSound);
-            blockNames.Add(newBlockType.blockName);
+            allBlocks[i] = new Block(i, newBlockType.blockName, newBlockType.blockSprite, newBlockType.placeSound, newBlockType.blockSmoothing);
         }
         selectionDropdown.AddOptions(blockNames);
         WorldGen.GenerateMainMap();
@@ -55,17 +54,24 @@ public class Block
     public int blockID;
     /// The block's name.
     public string blockName;
+    /// The prefix (e.g. "dirt" for a spritesheet that has "dirt_0", "dirt_1"...). Leave blank if tile does not smooth.
+    public bool blockSmoothing = false;
     /// The block's sprite.
     public Sprite blockSprite;
     /// The sound that is played when the block is placed.
     public AudioClip placeSound;
+    [HideInInspector] public SpriteSheet spriteSheet;
 
-    public Block(int id, string myName, Sprite mySprite, AudioClip place)
+    public Block(int id, string myName, Sprite mySprite, AudioClip place, bool doesSmooth)
     {
         blockID = id;
         blockName = myName;
         blockSprite = mySprite;
         placeSound = place;
+        blockSmoothing = doesSmooth;
+        if(doesSmooth) {
+            spriteSheet = new SpriteSheet(blockSprite.texture);
+        }
     }
 }
 
@@ -77,4 +83,5 @@ public struct BlockType
     public string blockName;
     public Sprite blockSprite;
     public AudioClip placeSound;
+    public bool blockSmoothing;
 }

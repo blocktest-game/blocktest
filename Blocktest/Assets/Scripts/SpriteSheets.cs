@@ -3,30 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-/// <summary>
-/// Warning! due to limitations on unity, You have to manually call setSprites on in OnValidate() In your script 
-/// Would be nice if I could do it automatically but thats unity being bs 
-///</summary> 
 [System.Serializable]
 public class SpriteSheet
 {
 	public Texture2D Texture;
 
-	[SerializeField]
-	public Sprite[] Sprites;
+	public Dictionary<string, Sprite> spritesDict = new Dictionary<string, Sprite>();
 
-	public void setSprites()
+	public SpriteSheet(Texture2D texture)
 	{
-
-		if (Texture != null)
+		Texture = texture;
+		string path = AssetDatabase.GetAssetPath(Texture).Replace("Assets/Resources/", null);
+		Sprite[] sprites = Resources.LoadAll<Sprite>(path.Remove(path.Length - 4));
+		foreach (Sprite sprite in sprites)
 		{
-			#if UNITY_EDITOR
-			var path = AssetDatabase.GetAssetPath(Texture).Substring(17);//Substring(17) To remove the "Assets/Resources/"
-			Sprites = Resources.LoadAll<Sprite>(path.Remove(path.Length - 4));
-			#endif
-		}
-		else {
-			Sprites = null;
+			spritesDict[sprite.name] = sprite;
 		}
 	}
+
+	public SpriteSheet(string texturePath)
+	{
+		string path = texturePath.Replace("Assets/Resources/", null);
+		Sprite[] sprites = Resources.LoadAll<Sprite>(path.Remove(path.Length - 4));
+		foreach (Sprite sprite in sprites)
+		{
+			spritesDict[sprite.name] = sprite;
+		}
+	}
+
 }
