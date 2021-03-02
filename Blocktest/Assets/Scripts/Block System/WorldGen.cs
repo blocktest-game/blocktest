@@ -10,7 +10,7 @@ public class WorldGen : MonoBehaviour
     [SerializeField] BlockManager blockManager;
     [SerializeField] BuildSystem buildSystem;
 
-    [SerializeField] int stonePercentage;
+    [SerializeField] float stonePercentage;
     /// The type of block used on the lowest layer.
 
     public Block stoneBlock;
@@ -35,10 +35,10 @@ public class WorldGen : MonoBehaviour
         buildSystem = GetComponent<BuildSystem>();
 
         worldSeed = Random.Range(0.0f, 1000000.0f);
-        Generate(255, 255, worldSeed);
+        GenerateWorld(1020, 255, worldSeed);
     }
 
-    public void Generate(int maxX = 255, int maxY = 255, float generatorSeed = 0.0f) 
+    public void GenerateWorld(int maxX = 1020, int maxY = 255, float generatorSeed = 0.0f) 
     {
         if(generatorSeed == 0.0f) {
             generatorSeed = Random.Range(0.0f, 1000000.0f);
@@ -51,10 +51,11 @@ public class WorldGen : MonoBehaviour
         progress = 0.0f;
         
         for (int xi = 0; xi < maxX; xi++) {
-            float x = (float)xi / 10;
+            float x = ((float)xi + 1) / 10;
             float result = Mathf.PerlinNoise(x * intensity + generatorSeed, generatorSeed);
-            int height = Mathf.RoundToInt(result * maxY); // Gets the height of the column
-            int stoneHeight = Mathf.RoundToInt((float)height * ((float)stonePercentage / 100));
+            int height = Mathf.RoundToInt(Mathf.Clamp01(result / 8 + 0.875f) * (maxY / 2)); // Gets the height of the column
+            float stoneResult = Mathf.PerlinNoise(x * 2 * intensity + generatorSeed, generatorSeed);
+            int stoneHeight = Mathf.RoundToInt((Mathf.Clamp01(stoneResult / 8 + 0.875f)) * ((float)height * (stonePercentage / 100)));
 
             for (int yi = 0; yi < maxY; yi++) {
                 Block toPlace;

@@ -1093,9 +1093,9 @@ MonoBehaviour:
   backgroundTilemap: {fileID: 1505424472}
   blockManager: {fileID: 1372863295}
   buildSystem: {fileID: 1372863297}
-  stonePercentage: 70
+  stonePercentage: 98
   worldSeed: 0
-  intensity: 0.1
+  intensity: 1
   progress: 0
   spawnPlatform: {fileID: 533833430}
 --- !u!1 &1505424469
