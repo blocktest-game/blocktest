@@ -4,52 +4,100 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5454635002767789542
-    second: smoothglass_0
+    second: glasspane_0
   - first:
       213: 5353741675611788154
-    second: smoothglass_1
+    second: glasspane_1
   - first:
       213: -6631533202083998581
-    second: smoothglass_2
+    second: glasspane_2
   - first:
       213: 7442002445311311664
-    second: smoothglass_3
+    second: glasspane_3
   - first:
       213: 6051394232058140561
-    second: smoothglass_4
+    second: glasspane_4
   - first:
       213: 4578610503297573377
-    second: smoothglass_5
+    second: glasspane_5
   - first:
       213: 4089993959185373898
-    second: smoothglass_6
+    second: glasspane_6
   - first:
       213: 4078396031950419467
-    second: smoothglass_7
+    second: glasspane_7
   - first:
       213: 5294641663825468328
-    second: smoothglass_8
+    second: glasspane_8
   - first:
       213: 7308794832780876983
-    second: smoothglass_9
+    second: glasspane_9
   - first:
       213: 5273043907755286590
-    second: smoothglass_10
+    second: glasspane_10
   - first:
       213: 8405357760488534918
-    second: smoothglass_11
+    second: glasspane_11
   - first:
       213: 1776367716672050277
-    second: smoothglass_12
+    second: glasspane_12
   - first:
       213: 5573890043545009933
-    second: smoothglass_13
+    second: glasspane_13
   - first:
       213: -390817721426142040
-    second: smoothglass_14
+    second: glasspane_14
   - first:
       213: -9203988127746793770
-    second: smoothglass_15
+    second: glasspane_15
+  - first:
+      213: -705048114202657727
+    second: glasspane_0
+  - first:
+      213: 7978220356894922516
+    second: glasspane_1
+  - first:
+      213: -8760440660039809616
+    second: glasspane_2
+  - first:
+      213: -9063222225440642568
+    second: glasspane_3
+  - first:
+      213: -8464079178298621959
+    second: glasspane_4
+  - first:
+      213: 1072041326443117728
+    second: glasspane_5
+  - first:
+      213: 1238264498282859794
+    second: glasspane_6
+  - first:
+      213: -6947349561480502785
+    second: glasspane_7
+  - first:
+      213: 472522840113132218
+    second: glasspane_8
+  - first:
+      213: 9203486097190287786
+    second: glasspane_9
+  - first:
+      213: -5644343737003737239
+    second: glasspane_10
+  - first:
+      213: 2695045471292278425
+    second: glasspane_11
+  - first:
+      213: -865832216049529008
+    second: glasspane_12
+  - first:
+      213: -4207745688668055041
+    second: glasspane_13
+  - first:
+      213: 7944789901987344521
+    second: glasspane_14
+  - first:
+      213: 855179991341045809
+    second: glasspane_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,13 +211,97 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: smoothglass_0
+      name: glasspane_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14c3463c97a2736f0800000000000000
+      internalID: -705048114202657727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glasspane_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4171388e42558be60800000000000000
+      internalID: 7978220356894922516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glasspane_2
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b5407e62a9ac6680800000000000000
+      internalID: -8760440660039809616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glasspane_3
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f96f2ca767f83280800000000000000
+      internalID: -9063222225440642568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glasspane_4
       rect:
         serializedVersion: 2
         x: 0
         y: 24
-        width: 8
-        height: 8
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,20 +309,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a123d986d5e3d44b0800000000000000
-      internalID: -5454635002767789542
+      spriteID: 9fffabaf4dc898a80800000000000000
+      internalID: -8464079178298621959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_1
+      name: glasspane_5
       rect:
         serializedVersion: 2
-        x: 8
+        x: 12
         y: 24
-        width: 8
-        height: 8
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,41 +330,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a739b0a40bf4c4a40800000000000000
-      internalID: 5353741675611788154
+      spriteID: 0ac3e2f08e7a0ee00800000000000000
+      internalID: 1072041326443117728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_2
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 24
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b84139520bf08f3a0800000000000000
-      internalID: -6631533202083998581
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: smoothglass_3
+      name: glasspane_6
       rect:
         serializedVersion: 2
         x: 24
         y: 24
-        width: 8
-        height: 8
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,20 +351,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03f7e5a6bcd474760800000000000000
-      internalID: 7442002445311311664
+      spriteID: 21d802620033f2110800000000000000
+      internalID: 1238264498282859794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_4
+      name: glasspane_7
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 24
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff12d79e16e069f90800000000000000
+      internalID: -6947349561480502785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glasspane_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 8
-        height: 8
+        y: 12
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -261,20 +393,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1975cad0efedaf350800000000000000
-      internalID: 6051394232058140561
+      spriteID: ab2b331050dbe8600800000000000000
+      internalID: 472522840113132218
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_5
+      name: glasspane_9
       rect:
         serializedVersion: 2
-        x: 8
-        y: 16
-        width: 8
-        height: 8
+        x: 12
+        y: 12
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -282,41 +414,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 102ace58efd7a8f30800000000000000
-      internalID: 4578610503297573377
+      spriteID: aa9f54ed7d959bf70800000000000000
+      internalID: 9203486097190287786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_6
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: acadcbe06d392c830800000000000000
-      internalID: 4089993959185373898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: smoothglass_7
+      name: glasspane_10
       rect:
         serializedVersion: 2
         x: 24
-        y: 16
-        width: 8
-        height: 8
+        y: 12
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -324,20 +435,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0674c1359f599830800000000000000
-      internalID: 4078396031950419467
+      spriteID: 96ff0b5b6434ba1b0800000000000000
+      internalID: -5644343737003737239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_8
+      name: glasspane_11
       rect:
         serializedVersion: 2
-        x: 0
-        y: 8
-        width: 8
-        height: 8
+        x: 36
+        y: 12
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -345,83 +456,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8abdc418a885a7940800000000000000
-      internalID: 5294641663825468328
+      spriteID: 996c6e1c399b66520800000000000000
+      internalID: 2695045471292278425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_9
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7bc5d104d2e0e6560800000000000000
-      internalID: 7308794832780876983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: smoothglass_10
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e30aace0f7d9d2940800000000000000
-      internalID: 5273043907755286590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: smoothglass_11
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 683fdf38954d5a470800000000000000
-      internalID: 8405357760488534918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: smoothglass_12
+      name: glasspane_12
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
-        height: 8
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -429,20 +477,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56495b6d60de6a810800000000000000
-      internalID: 1776367716672050277
+      spriteID: 05f4747df22fbf3f0800000000000000
+      internalID: -865832216049529008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_13
+      name: glasspane_13
       rect:
         serializedVersion: 2
-        x: 8
+        x: 12
         y: 0
-        width: 8
-        height: 8
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -450,41 +498,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0f369e767f6a5d40800000000000000
-      internalID: 5573890043545009933
+      spriteID: ff952c9f6951b95c0800000000000000
+      internalID: -4207745688668055041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smoothglass_14
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ac977e5a59839af0800000000000000
-      internalID: -390817721426142040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: smoothglass_15
+      name: glasspane_14
       rect:
         serializedVersion: 2
         x: 24
         y: 0
-        width: 8
-        height: 8
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -492,8 +519,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6de5db8009dd44080800000000000000
-      internalID: -9203988127746793770
+      spriteID: 980f0139250914e60800000000000000
+      internalID: 7944789901987344521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glasspane_15
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13897e2dba53edb00800000000000000
+      internalID: 855179991341045809
       vertices: []
       indices: 
       edges: []

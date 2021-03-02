@@ -809,21 +809,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allBlockTypes:
   - blockName: Dirt
-    blockSprite: {fileID: 21300000, guid: 951ed7f8d9e4c124c9193232b0fc1696, type: 3}
+    blockSprite: {fileID: 5634026908348037240, guid: 951ed7f8d9e4c124c9193232b0fc1696, type: 3}
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 0
+    blockSmoothing: 1
   - blockName: Grass
-    blockSprite: {fileID: 21300000, guid: 6353d084c91515a49b3cee53c7a59502, type: 3}
+    blockSprite: {fileID: 7932798033344189819, guid: 6353d084c91515a49b3cee53c7a59502, type: 3}
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 0
+    blockSmoothing: 1
   - blockName: Rock
-    blockSprite: {fileID: 21300000, guid: 1d96f704e392f7c4a8ed8f0feeebfadc, type: 3}
+    blockSprite: {fileID: -2182124076254010665, guid: 1d96f704e392f7c4a8ed8f0feeebfadc, type: 3}
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 0
+    blockSmoothing: 1
   - blockName: Wood
-    blockSprite: {fileID: 21300000, guid: 3cfb0cea20edd5a42b52f5ab5d385761, type: 3}
+    blockSprite: {fileID: 7440981132975211316, guid: 3cfb0cea20edd5a42b52f5ab5d385761, type: 3}
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 0
+    blockSmoothing: 1
   - blockName: Glass
     blockSprite: {fileID: 21300000, guid: 73b660d84c6282b4b9974ba279041fc2, type: 3}
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
@@ -833,13 +833,13 @@ MonoBehaviour:
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
     blockSmoothing: 1
   - blockName: Stone Brick
-    blockSprite: {fileID: 21300000, guid: 0695a40b173ab6c46a29fb3f2eec2ffe, type: 3}
+    blockSprite: {fileID: -585695636921799601, guid: 0695a40b173ab6c46a29fb3f2eec2ffe, type: 3}
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 0
+    blockSmoothing: 1
   - blockName: Log
-    blockSprite: {fileID: 21300000, guid: b47d7205f00d8df45b64a0fe0932b64e, type: 3}
+    blockSprite: {fileID: -5034061168752090764, guid: b47d7205f00d8df45b64a0fe0932b64e, type: 3}
     placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 0
+    blockSmoothing: 1
   blockNames: []
   selectionDropdown: {fileID: 2088312332}
   foregroundTilemap: {fileID: 1983780303}

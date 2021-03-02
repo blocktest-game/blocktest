@@ -1,7 +1,55 @@
 fileFormatVersion: 2
 guid: 0695a40b173ab6c46a29fb3f2eec2ffe
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -585695636921799601
+    second: stonebrick_0
+  - first:
+      213: 331746978076626750
+    second: stonebrick_1
+  - first:
+      213: 9000257300056902562
+    second: stonebrick_2
+  - first:
+      213: 4010505991179830172
+    second: stonebrick_3
+  - first:
+      213: 4521410712923226450
+    second: stonebrick_4
+  - first:
+      213: 1013724412860668495
+    second: stonebrick_5
+  - first:
+      213: -7540549350676487568
+    second: stonebrick_6
+  - first:
+      213: 8957592812602722661
+    second: stonebrick_7
+  - first:
+      213: 3153757419885746801
+    second: stonebrick_8
+  - first:
+      213: 58481073057525564
+    second: stonebrick_9
+  - first:
+      213: 56279202014036694
+    second: stonebrick_10
+  - first:
+      213: -8744887659203481166
+    second: stonebrick_11
+  - first:
+      213: 5928414389211598335
+    second: stonebrick_12
+  - first:
+      213: -3381486262642136957
+    second: stonebrick_13
+  - first:
+      213: 6228831244785798832
+    second: stonebrick_14
+  - first:
+      213: 3271155800642803859
+    second: stonebrick_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +89,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
@@ -113,7 +161,343 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: stonebrick_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4ca7cedbe03fd7f0800000000000000
+      internalID: -585695636921799601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3f019f6e1a9a9400800000000000000
+      internalID: 331746978076626750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_2
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ab0209345657ec70800000000000000
+      internalID: 9000257300056902562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_3
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 36
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9389dd43fd28a730800000000000000
+      internalID: 4010505991179830172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2514f6386174fbe30800000000000000
+      internalID: 4521410712923226450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_5
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 24
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4a93b88bf8711e00800000000000000
+      internalID: 1013724412860668495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_6
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07220ad21569a5790800000000000000
+      internalID: -7540549350676487568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_7
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 24
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56907c52433cf4c70800000000000000
+      internalID: 8957592812602722661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17ada000aa564cb20800000000000000
+      internalID: 3153757419885746801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_9
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 12
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3f6da1e934cfc000800000000000000
+      internalID: 58481073057525564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_10
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 12
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d20a44d2a1f7c000800000000000000
+      internalID: 56279202014036694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_11
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 12
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b1ba70a10be3a680800000000000000
+      internalID: -8744887659203481166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffd85461a75f54250800000000000000
+      internalID: 5928414389211598335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_13
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3882a56f82c8211d0800000000000000
+      internalID: -3381486262642136957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_14
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0becf4fe301417650800000000000000
+      internalID: 6228831244785798832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stonebrick_15
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 398d54e8eda756d20800000000000000
+      internalID: 3271155800642803859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

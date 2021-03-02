@@ -41,6 +41,7 @@ public class BlockManager : MonoBehaviour {
             // Instead of referencing multiple arrays, we just create a new BlockType object and get values from that.
             BlockType newBlockType = allBlockTypes[i];
             allBlocks[i] = new Block(i, newBlockType.blockName, newBlockType.blockSprite, newBlockType.placeSound, newBlockType.blockSmoothing);
+            blockNames.Add(newBlockType.blockName);
         }
         selectionDropdown.AddOptions(blockNames);
         WorldGen.GenerateMainMap();
@@ -54,7 +55,7 @@ public class Block
     public int blockID;
     /// The block's name.
     public string blockName;
-    /// The prefix (e.g. "dirt" for a spritesheet that has "dirt_0", "dirt_1"...). Leave blank if tile does not smooth.
+    /// Whether or not the block supports icon smoothing.
     public bool blockSmoothing = false;
     /// The block's sprite.
     public Sprite blockSprite;
