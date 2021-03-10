@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 
 public class BlockManager : MonoBehaviour {
 
@@ -18,9 +19,19 @@ public class BlockManager : MonoBehaviour {
     /// Dropdown used for item selection
     [SerializeField] Dropdown selectionDropdown;
 
+    /// Tilemap for foreground objects
+    [SerializeField] Tilemap foregroundTilemap;
+    /// Tilemap for background (non-dense) objects
+    [SerializeField] Tilemap backgroundTilemap;
+
 
     private void Awake()
     {
+        // Add this to the global variable
+        Globals.blockManager = this;
+        Globals.foregroundTilemap = foregroundTilemap;
+        Globals.backgroundTilemap = backgroundTilemap;
+
         // Initialise allBlocks array.
         allBlocks = new Block[allBlockTypes.Length];
         
@@ -33,6 +44,7 @@ public class BlockManager : MonoBehaviour {
             blockNames.Add(newBlockType.blockName);
         }
         selectionDropdown.AddOptions(blockNames);
+        WorldGen.GenerateMainMap();
     }
 }
 

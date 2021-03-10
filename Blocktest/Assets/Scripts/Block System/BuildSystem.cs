@@ -4,12 +4,10 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public class BuildSystem : MonoBehaviour
+public static class BuildSystem
 {
-    /// Tilemap for foreground objects
-    [SerializeField] Tilemap foregroundTilemap;
-    /// Tilemap for background (non-dense) objects
-    [SerializeField] Tilemap backgroundTilemap;
+
+    [SerializeField] public static int[,,] currentWorld = new int[Globals.maxX, Globals.maxY, 2];
 
     //
     // Summary:
@@ -19,17 +17,16 @@ public class BuildSystem : MonoBehaviour
     //          Whether or not the block to be destroyed is in the foreground.
     //      position:
     //          The position of the block to destroy (world coords)
-    public void BreakBlockWorld(bool foreground, Vector2 position)
-    {
-        BreakBlockCell(foreground, foregroundTilemap.WorldToCell(position));
-    }
+    public static void BreakBlockWorld(bool foreground, Vector2 position) => BreakBlockCell(foreground, Globals.foregroundTilemap.WorldToCell(position));
 
-    public void BreakBlockCell(bool foreground, Vector3Int tilePosition)
+    public static void BreakBlockCell(bool foreground, Vector3Int tilePosition)
     {
-        if(foreground && foregroundTilemap.HasTile(tilePosition)) {
-            foregroundTilemap.SetTile(tilePosition, null);
-        } else if (!foreground && backgroundTilemap.HasTile(tilePosition)) {
-            backgroundTilemap.SetTile(tilePosition, null);
+        if(foreground && Globals.foregroundTilemap.HasTile(tilePosition)) {
+            Globals.foregroundTilemap.SetTile(tilePosition, null);
+            currentWorld[tilePosition.x, tilePosition.y, 0] = 0;
+        } else if (!foreground && Globals.backgroundTilemap.HasTile(tilePosition)) {
+            Globals.backgroundTilemap.SetTile(tilePosition, null);
+            currentWorld[tilePosition.x, tilePosition.y, 1] = 0;
         }
     }
 
@@ -43,10 +40,7 @@ public class BuildSystem : MonoBehaviour
     //          Whether or not the block should be placed in the foreground.
     //      position:
     //          The position of the placed block
-    public void PlaceBlockWorld(Block toPlace, bool foreground, Vector2 position)
-    {
-        PlaceBlockCell(toPlace, foreground, foregroundTilemap.WorldToCell(position));
-    }
+    public static void PlaceBlockWorld(Block toPlace, bool foreground, Vector2 position) => PlaceBlockCell(toPlace, foreground, Globals.foregroundTilemap.WorldToCell(position));
 
     //
     // Summary:
@@ -58,6 +52,26 @@ public class BuildSystem : MonoBehaviour
     //          Whether or not the block should be placed in the foreground.
     //      position:
     //          The position of the placed block
+    public static void PlaceBlockCell(Block toPlace, bool foreground, Vector3Int tilePosition)
+    {
+        BlockTile newTile = BlockTile.CreateInstance<BlockTile>();
+        newTile.sourceBlock = toPlace;
+        newTile.sprite = toPlace.blockSprite;
+        newTile.name = toPlace.blockName;
+
+        if(foreground) {
+            newTile.colliderType = Tile.ColliderType.Grid;
+            Globals.foregroundTilemap.SetTile(tilePosition, newTile);
+            currentWorld[tilePosition.x, tilePosition.y, 0] = toPlace.blockID + 1;
+        } else {
+            newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            Globals.backgroundTilemap.SetTile(tilePosition, newTile);
+            currentWorld[tilePosition.x, tilePosition.y, 1] = toPlace.blockID + 1;
+        }
+    }
+
+    public static void PlaceBlockCell(Block toPlace, bool foreground, Vector2 tilePosition) => PlaceBlockCell(toPlace, foreground, new Vector3Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y), 0));
+
     public void PlaceBlockCell(Block toPlace, bool foreground, Vector3Int tilePosition)
     {
         BlockTile newTile = BlockTile.CreateInstance<BlockTile>();

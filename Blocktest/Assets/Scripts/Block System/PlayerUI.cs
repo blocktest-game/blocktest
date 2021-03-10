@@ -5,12 +5,6 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
-
-    /// Reference to main BlockManager script.
-    private BlockManager blockManager;
-    /// Reference to the main BuildSystem script.
-    private BuildSystem buildSystem;
-
     /// The ID of the currently selected block.
     private int currentBlockID = 0;
     /// The currently selected block.
@@ -33,17 +27,8 @@ public class PlayerUI : MonoBehaviour
     /// Dropdown used for item selection
     [SerializeField] Dropdown selectionDropdown;
 
-    /// Tilemap for foreground objects
-    [SerializeField] Tilemap foregroundTilemap;
-    ///Tilemap for background (non-dense) objects
-    [SerializeField] Tilemap backgroundTilemap;
-
-
     void Start()
     {
-        GameObject BlockSystem = GameObject.Find("BlockSystem");
-        buildSystem = BlockSystem.GetComponent<BuildSystem>();
-        blockManager = BlockSystem.GetComponent<BlockManager>();
         InitializeCursor();
     }
 
@@ -54,9 +39,9 @@ public class PlayerUI : MonoBehaviour
             ToggleBuild();
         }
 
-        Vector3Int tilePosition = foregroundTilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        Vector3 worldTilePosition = foregroundTilemap.CellToWorld(tilePosition) + foregroundTilemap.cellSize / 2;
-        blockCursor.transform.position = foregroundTilemap.CellToWorld(tilePosition) + foregroundTilemap.cellSize / 2;
+        Vector3Int tilePosition = Globals.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Vector3 worldTilePosition = Globals.CellToWorld(tilePosition) + Globals.foregroundTilemap.cellSize / 2;
+        blockCursor.transform.position = Globals.CellToWorld(tilePosition) + Globals.foregroundTilemap.cellSize / 2;
 
         if(Vector2.Distance(worldTilePosition, gameObject.transform.position) > maxBuildDistance) {
             currentRenderer.color = new Color(1f, 0f, 0f, 0.7f);
@@ -74,11 +59,11 @@ public class PlayerUI : MonoBehaviour
 
             currentRenderer.sprite = currentBlock.blockSprite;
 
-            bool canBuildForeground = foregroundTilemap.GetTile(tilePosition) == null;
-            bool canBuildBackground = backgroundTilemap.GetTile(tilePosition) == null;
+            bool canBuildForeground = Globals.GetTile(tilePosition, true) == null;
+            bool canBuildBackground = Globals.GetTile(tilePosition, false) == null;
 
             if(canBuildForeground) {
-                if(Physics2D.BoxCast(worldTilePosition, foregroundTilemap.cellSize / 2, 0, Vector2.zero).collider != null){
+                if(Physics2D.BoxCast(worldTilePosition, Globals.foregroundTilemap.cellSize / 2, 0, Vector2.zero).collider != null){
                     canBuildForeground = false;
                 }
             }
@@ -128,9 +113,9 @@ public class PlayerUI : MonoBehaviour
         }
         if (currentBlock == null) {
             //Ensure the block ID is valid.
-            if (blockManager.allBlocks[currentBlockID] != null)
+            if (Globals.allBlocks[currentBlockID] != null)
             {
-                currentBlock = blockManager.allBlocks[currentBlockID];
+                currentBlock = Globals.allBlocks[currentBlockID];
             }
         }
     }
@@ -150,9 +135,9 @@ public class PlayerUI : MonoBehaviour
         if (currentBlock == null)
         {
             //Ensure the block ID is valid.
-            if (blockManager.allBlocks[currentBlockID] != null)
+            if (Globals.allBlocks[currentBlockID] != null)
             {
-                currentBlock = blockManager.allBlocks[currentBlockID];
+                currentBlock = Globals.allBlocks[currentBlockID];
             }
         }
         currentRenderer.color = new Color(1f, 1f, 1f, 1f);
@@ -171,7 +156,7 @@ public class PlayerUI : MonoBehaviour
     //          The amount of slots to "cycle."
     public void CycleBlockSelection(int slotDelta)
     {
-        int totalBlocks = blockManager.allBlocks.Length - 1;
+        int totalBlocks = Globals.allBlocks.Length - 1;
         int newBlockID = currentBlockID + slotDelta;
         if(newBlockID > totalBlocks) {
             newBlockID = 0;
@@ -189,9 +174,9 @@ public class PlayerUI : MonoBehaviour
     //          The slot to change to.
     public void ChangeBlockSelection(int slot)
     {
-        slot = Mathf.Clamp(slot, 0, blockManager.allBlocks.Length - 1);
+        slot = Mathf.Clamp(slot, 0, Globals.allBlocks.Length - 1);
         currentBlockID = slot;
-        currentBlock = blockManager.allBlocks[currentBlockID];
+        currentBlock = Globals.allBlocks[currentBlockID];
         selectionDropdown.captionText.text = currentBlock.blockName;
         if(buildMode) {
             currentRenderer.sprite = currentBlock.blockSprite;
@@ -211,7 +196,7 @@ public class PlayerUI : MonoBehaviour
     private void PlayerPlaceBlock(Block toPlace, bool foreground, Vector2 position)
     {
         audioSource.PlayOneShot(toPlace.placeSound);
-        buildSystem.PlaceBlockWorld(toPlace, foreground, position);
+        BuildSystem.PlaceBlockWorld(toPlace, foreground, position);
     }
 
     //
@@ -224,7 +209,7 @@ public class PlayerUI : MonoBehaviour
     //          The position of the block to destroy (world coords)
     private void PlayerBreakBlock(bool foreground, Vector2 position)
     {
-        buildSystem.BreakBlockWorld(foreground, position);
+        BuildSystem.BreakBlockWorld(foreground, position);
     }
 
 }

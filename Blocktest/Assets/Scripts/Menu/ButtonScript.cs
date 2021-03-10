@@ -58,7 +58,7 @@ public class ButtonScript : MonoBehaviour
     public void startSingleplayer() {
         switchState(null);
         loadingScreen.SetActive(true);
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadSceneAsync("MainScene");
     }
 
 }
