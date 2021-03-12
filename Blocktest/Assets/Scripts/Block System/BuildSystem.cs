@@ -71,27 +71,6 @@ public static class BuildSystem
     }
 
     public static void PlaceBlockCell(Block toPlace, bool foreground, Vector2 tilePosition) => PlaceBlockCell(toPlace, foreground, new Vector3Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y), 0));
-
-    public void PlaceBlockCell(Block toPlace, bool foreground, Vector3Int tilePosition)
-    {
-        BlockTile newTile = BlockTile.CreateInstance<BlockTile>();
-        newTile.sourceBlock = toPlace;
-        newTile.sprite = toPlace.blockSprite;
-        newTile.name = toPlace.blockName;
-
-        if(foreground) {
-            newTile.colliderType = Tile.ColliderType.Grid;
-            foregroundTilemap.SetTile(tilePosition, newTile);
-        } else {
-            newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-            backgroundTilemap.SetTile(tilePosition, newTile);
-        }
-    }
-
-    public void PlaceBlockCell(Block toPlace, bool foreground, Vector2 tilePosition)
-    {
-        PlaceBlockCell(toPlace, foreground, new Vector3Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y), 0));
-    }
 }
 
 public class BlockTile : Tile 
