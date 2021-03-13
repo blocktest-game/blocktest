@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     /// Rigidbody component of the player
     private Rigidbody2D playerRB;
+    private BoxCollider2D playerBC;
     // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        playerBC = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector2.right * horizontalInput * moveSpeed * Time.deltaTime);
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && (playerRB.GetContacts(new BoxCollider2D[]{playerBC}) > 0)) // Checks to see if the player is colliding with ANYTHING
         {
             playerRB.AddForce(Vector2.up * jumpStrength, ForceMode2D.Impulse);
         }

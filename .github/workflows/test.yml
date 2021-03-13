@@ -1,0 +1,61 @@
+name: Test Project
+
+on:
+  pull_request: {}
+  push: { branches: [master, dev] }
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+#   # Request license file job
+#  requestManualActivationFile:
+#    name: Request manual activation file
+#    runs-on: ubuntu-latest
+#    steps:
+#      # Request manual activation file
+#      - name: Request manual activation file
+#        uses: game-ci/unity-request-activation-file@v2
+#        id: getManualLicenseFile
+#        with:
+#          unityVersion: 2020.2.5f1
+#      # Upload artifact (Unity_v20XX.X.XXXX.alf)
+#      - name: Expose as artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+#          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+  testAllModes:
+    name: Test in ${{ matrix.testMode }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - Blocktest
+        testMode:
+          - playmode
+          - editmode
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: ${{ matrix.projectPath }}/Library
+          key: Library-${{ matrix.projectPath }}
+          restore-keys: |
+            Library-
+      - uses: game-ci/unity-test-runner@v2
+        id: tests
+        with:
+          projectPath: ${{ matrix.projectPath }}
+          testMode: ${{ matrix.testMode }}
+          artifactsPath: ${{ matrix.testMode }}-artifacts
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          checkName: ${{ matrix.testMode }} Test Results
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Test results for ${{ matrix.testMode }}
+          path: ${{ steps.tests.outputs.artifactsPath }}
