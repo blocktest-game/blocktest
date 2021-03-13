@@ -11,7 +11,7 @@ jobs:
   createRelease:
     name: Create Release
     runs-on: ubuntu-latest
-    jobs:
+    steps:
       - name: Create Release
         id: createRelease
         uses: actions/create-release@v1
