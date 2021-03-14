@@ -202,7 +202,7 @@ Transform:
   - {fileID: 1983780301}
   - {fileID: 1505424470}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &663017120
 GameObject:
@@ -2063,57 +2063,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3613805916373815116, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_UpscaleRT
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916373815116, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_CropFrameX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916373815118, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916373815118, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: orthographic size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500976, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: backgroundTilemap
-      value: 
-      objectReference: {fileID: 1505424472}
-    - target: {fileID: 3613805916922500976, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: foregroundTilemap
-      value: 
-      objectReference: {fileID: 1983780303}
     - target: {fileID: 3613805916922500976, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: selectionDropdown
       value: 
       objectReference: {fileID: 2088312332}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Size.x
-      value: 0.68207717
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Size.y
-      value: 1.8120098
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.031792283
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.093995094
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500979, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3613805916922500982, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3613805916922500982, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: m_LocalPosition.x
