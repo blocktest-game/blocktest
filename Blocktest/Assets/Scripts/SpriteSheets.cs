@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
 [System.Serializable]
 public class SpriteSheet
 {
@@ -10,9 +9,11 @@ public class SpriteSheet
 
 	public Dictionary<string, Sprite> spritesDict = new Dictionary<string, Sprite>();
 
+#if UNITY_EDITOR
 	public SpriteSheet(Texture2D texture)
 	{
 		Texture = texture;
+
 		string path = AssetDatabase.GetAssetPath(Texture).Replace("Assets/Resources/", null);
 		Sprite[] sprites = Resources.LoadAll<Sprite>(path.Remove(path.Length - 4));
 		foreach (Sprite sprite in sprites)
@@ -20,11 +21,12 @@ public class SpriteSheet
 			spritesDict[sprite.name] = sprite;
 		}
 	}
+#endif
 
 	public SpriteSheet(string texturePath)
 	{
 		string path = texturePath.Replace("Assets/Resources/", null);
-		Sprite[] sprites = Resources.LoadAll<Sprite>(path.Remove(path.Length - 4));
+		Sprite[] sprites = Resources.LoadAll<Sprite>(path);
 		foreach (Sprite sprite in sprites)
 		{
 			spritesDict[sprite.name] = sprite;

@@ -12,9 +12,11 @@ jobs:
   createRelease:
     name: Create Release
     runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.createReleaseStep.outputs.upload_url }}
     steps:
       - name: Create Release
-        id: createRelease
+        id: createReleaseStep
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,9 +29,12 @@ jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
+    needs: createRelease
     strategy:
       fail-fast: false
       matrix:
+        projectPath:
+          - Blocktest
         targetPlatform:
           - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
           - StandaloneWindows # Build a Windows standalone.
@@ -42,19 +47,22 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: Library
+          path: ${{ matrix.projectPath }}/Library
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
 
       - uses: game-ci/unity-builder@v2
         id: build
         with:
+          unityVersion: 2020.2.5f1
+          projectPath: ${{ matrix.projectPath }}
           targetPlatform: ${{ matrix.targetPlatform }}
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+      - name: Zip build
+        run: |
+          pushd build/${{ matrix.targetPlatform }}
+          zip -r ../../Build-${{ matrix.targetPlatform }}.zip .
+          popd
 
       - name: Upload Release Asset
         id: upload-release-asset 
@@ -62,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.createRelease.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: build/${{ matrix.targetPlatform }}
-          asset_name: Build-${{ matrix.targetPlatform }}
+          upload_url: ${{ needs.createRelease.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./Build-${{ matrix.targetPlatform }}.zip
+          asset_name: Build-${{ matrix.targetPlatform }}.zip
           asset_content_type: application/zip

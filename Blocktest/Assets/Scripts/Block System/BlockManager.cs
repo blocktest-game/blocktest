@@ -71,7 +71,7 @@ public class Block
         placeSound = place;
         blockSmoothing = doesSmooth;
         if(doesSmooth) {
-            spriteSheet = new SpriteSheet(blockSprite.texture);
+            spriteSheet = new SpriteSheet("Sprites/" + blockSprite.texture.name);
         }
     }
 }
