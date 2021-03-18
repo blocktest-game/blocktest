@@ -11,7 +11,7 @@
 A currently highly indev project aiming to give the experience of games like Terraria and Starbound whilst being open-source and community-driven. Further information can be found in the [blocktest HackMD account](https://hackmd.io/@blocktest).
 
 ![current_screenshot](https://user-images.githubusercontent.com/29362068/111568985-cd467b00-876f-11eb-98a0-811d39f13ea0.png)
-*A screenshot (taken Mar. 3 2021) displaying the features which are already functional, most importantly the building system.*
+*A screenshot (taken Mar. 17th, 2021) displaying the features which are already functional, most importantly the building system.*
 
 ## Downloading the game
 
