@@ -61,16 +61,17 @@ public class Block
     public Sprite blockSprite;
     /// The sound that is played when the block is placed.
     public AudioClip placeSound;
-    [HideInInspector] public SpriteSheet spriteSheet;
+    /// The sprite sheet used for smoothing the block.
+    public SpriteSheet spriteSheet;
 
-    public Block(int id, string myName, Sprite mySprite, AudioClip place, bool doesSmooth)
+    public Block(int id, string name, Sprite sprite, AudioClip place, bool smooth)
     {
         blockID = id;
-        blockName = myName;
-        blockSprite = mySprite;
+        blockName = name;
+        blockSprite = sprite;
         placeSound = place;
-        blockSmoothing = doesSmooth;
-        if(doesSmooth) {
+        blockSmoothing = smooth;
+        if(smooth) {
             spriteSheet = new SpriteSheet("Sprites/" + blockSprite.texture.name);
         }
     }
