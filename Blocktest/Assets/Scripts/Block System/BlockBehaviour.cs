@@ -8,8 +8,12 @@ public class Block
     public int blockID = -1;
     /// The block's name.
     public string blockName = "Error";
+
     /// Whether or not the block supports icon smoothing.
     public bool blockSmoothing = false;
+    /// Whether or not a block smooths only with itself
+    public bool smoothSelf = false;
+
     /// Whether or not a block can be placed in the background.
     public bool canPlaceBackground = true;
     /// The block's sprite.

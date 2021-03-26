@@ -24,13 +24,13 @@ public static class BuildSystem
     public static void BreakBlockCell(bool foreground, Vector3Int tilePosition)
     {
         if(foreground && Globals.foregroundTilemap.HasTile(tilePosition)) {
-            BlockTile prevTile = (BlockTile)Globals.foregroundTilemap.GetTile(tilePosition);
+            BlockTile prevTile = Globals.GetTile(tilePosition, foreground);
             prevTile.sourceBlock.OnBreak(tilePosition, true);
 
             Globals.foregroundTilemap.SetTile(tilePosition, null);
             currentWorld[tilePosition.x, tilePosition.y, 0] = 0;
         } else if (!foreground && Globals.backgroundTilemap.HasTile(tilePosition)) {
-            BlockTile prevTile = (BlockTile)Globals.backgroundTilemap.GetTile(tilePosition);
+            BlockTile prevTile = Globals.GetTile(tilePosition, foreground);
             prevTile.sourceBlock.OnBreak(tilePosition, false);
 
             Globals.backgroundTilemap.SetTile(tilePosition, null);
@@ -130,7 +130,11 @@ public class BlockTile : Tile
     }
 
     private bool HasSmoothableTile(Vector3Int position, ITilemap tilemap) {
-        return tilemap.GetTile(position) != null;
+        if(sourceBlock.smoothSelf) { return IsSameBlockType(Globals.GetTile(position, tilemap)); }
+        return Globals.GetTile(position, tilemap) != null;
     }
+
+    private bool IsSameBlockType(BlockTile otherBlock) => otherBlock?.sourceBlock == sourceBlock;
+    private bool IsSameBlockType(Block otherBlock) => otherBlock == sourceBlock;
 
 }

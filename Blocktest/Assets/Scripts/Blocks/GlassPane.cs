@@ -8,6 +8,7 @@ public class GlassPane : Block {
         blockName = "Glass Pane";
         blockID = 5;
         blockSmoothing = true;
+        smoothSelf = true;
         base.Initialize();
     }
 }

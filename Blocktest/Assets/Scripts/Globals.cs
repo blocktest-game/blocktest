@@ -18,5 +18,9 @@ static class Globals {
     public static Vector3Int WorldToCell(Vector2 worldLocation) => foregroundTilemap.WorldToCell(worldLocation);
 
     // Get a certain tile on either the foreground or background at a certain position
-    public static TileBase GetTile(Vector3Int position, bool foreground) => foreground ? foregroundTilemap.GetTile(position) : backgroundTilemap.GetTile(position);
+    public static BlockTile GetTile(Vector3Int position, bool foreground) => foreground ? foregroundTilemap.GetTile<BlockTile>(position) : backgroundTilemap.GetTile<BlockTile>(position);
+    // Same function, but takes a specific tilemap as an input instead
+    public static BlockTile GetTile(Vector3Int position, Tilemap tilemap) => tilemap.GetTile<BlockTile>(position);
+    public static BlockTile GetTile(Vector3Int position, ITilemap tilemap) => tilemap.GetTile<BlockTile>(position);
+
 }
