@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 1;
     /// Jump strength of the player
     [SerializeField] float jumpStrength = 7.5f;
-    [SerializeField] LayerMask groundLayer;
     /// Rigidbody component of the player
     private Rigidbody2D playerRigidBody;
     /// Animator component of the player

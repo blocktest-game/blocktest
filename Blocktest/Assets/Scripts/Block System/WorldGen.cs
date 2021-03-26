@@ -23,7 +23,11 @@ public static class WorldGen
     public static void GenerateMainMap()
     {
         worldSeed = Random.Range(0.0f, 1000000.0f);
+#if UNITY_EDITOR // Generates a much smaller map if you're in the editor for sanity reasons
+        GenerateWorld(new Vector2Int(0, 0), new Vector2Int(128, 128), worldSeed);
+#else
         GenerateWorld(new Vector2Int(0, 0), new Vector2Int(510, 255), worldSeed);
+#endif
     }
 
     public static void GenerateWorld(Vector2Int startLoc, Vector2Int endLoc, float generatorSeed = 0.0f) 

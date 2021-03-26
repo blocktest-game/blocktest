@@ -24,9 +24,15 @@ public static class BuildSystem
     public static void BreakBlockCell(bool foreground, Vector3Int tilePosition)
     {
         if(foreground && Globals.foregroundTilemap.HasTile(tilePosition)) {
+            BlockTile prevTile = (BlockTile)Globals.foregroundTilemap.GetTile(tilePosition);
+            prevTile.sourceBlock.OnBreak(tilePosition, true);
+
             Globals.foregroundTilemap.SetTile(tilePosition, null);
             currentWorld[tilePosition.x, tilePosition.y, 0] = 0;
         } else if (!foreground && Globals.backgroundTilemap.HasTile(tilePosition)) {
+            BlockTile prevTile = (BlockTile)Globals.backgroundTilemap.GetTile(tilePosition);
+            prevTile.sourceBlock.OnBreak(tilePosition, false);
+
             Globals.backgroundTilemap.SetTile(tilePosition, null);
             currentWorld[tilePosition.x, tilePosition.y, 1] = 0;
         }
@@ -67,12 +73,13 @@ public static class BuildSystem
         newTile.sourceBlock = toPlace;
         newTile.sprite = toPlace.blockSprite;
         newTile.name = toPlace.blockName;
+        toPlace.OnPlace(tilePosition, foreground);
 
         if(foreground) {
             newTile.colliderType = Tile.ColliderType.Grid;
             Globals.foregroundTilemap.SetTile(tilePosition, newTile);
             currentWorld[tilePosition.x, tilePosition.y, 0] = toPlace.blockID + 1;
-        } else {
+        } else if(toPlace.canPlaceBackground) {
             newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
             Globals.backgroundTilemap.SetTile(tilePosition, newTile);
             currentWorld[tilePosition.x, tilePosition.y, 1] = toPlace.blockID + 1;

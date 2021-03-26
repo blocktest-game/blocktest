@@ -1,5 +1,6 @@
 // System required for [Serializable] attribute.
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,6 @@ using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 public class BlockManager : MonoBehaviour {
-
-    /// Array we expose to inspector / editor, use this instead of the old arrays to define block types.
-    [SerializeField] BlockType[] allBlockTypes;
 
     /// Array to store all blocks created in Start()
     [HideInInspector] public Block[] allBlocks;
@@ -32,58 +30,34 @@ public class BlockManager : MonoBehaviour {
         Globals.foregroundTilemap = foregroundTilemap;
         Globals.backgroundTilemap = backgroundTilemap;
 
-        // Initialise allBlocks array.
+        // This mess gets all subtypes of Block and puts the types in a list.
+        Type[] allBlockTypes = (
+                        from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                        from assemblyType in domainAssembly.GetTypes()
+                        where assemblyType.IsSubclassOf(typeof(Block))
+                        select assemblyType).ToArray();
+
         allBlocks = new Block[allBlockTypes.Length];
-        
+
         // For loops to populate main allBlocks array.
         for (int i = 0; i < allBlockTypes.Length; i++)
         {
-            // Instead of referencing multiple arrays, we just create a new BlockType object and get values from that.
-            BlockType newBlockType = allBlockTypes[i];
-            allBlocks[i] = new Block(i, newBlockType.blockName, newBlockType.blockSprite, newBlockType.placeSound, newBlockType.blockSmoothing);
-            blockNames.Add(newBlockType.blockName);
+            Type newBlockType = allBlockTypes[i];
+            Block newBlock = (Block)Activator.CreateInstance(newBlockType);
+            Block newBlockTwo = new Block();
+            newBlock.Initialize();
+            if(newBlock.blockID == -1) {
+                newBlock.blockID = i;
+            }
+            if(allBlocks[newBlock.blockID] != null) {
+                Debug.LogWarning("Block " + newBlock + " conflicts with block " + allBlocks[newBlock.blockID] + "! (Block ID: " + newBlock.blockID + ")");
+            } else if(newBlock.blockID > allBlocks.Length || newBlock.blockID < 0) {
+                Debug.LogWarning("Block " + newBlock + " has invalid ID " + newBlock.blockID + "! (Max ID " + allBlocks.Length + ")");
+            }
+            blockNames.Add(newBlock.blockName);
+            allBlocks[newBlock.blockID] = newBlock;
         }
         selectionDropdown.AddOptions(blockNames);
-        WorldGen.GenerateMainMap();
+        WorldGen.GenerateMainMap(); // TODO: Move this to some sort of global initialization method
     }
-}
-
-// We still use the Block class to store the final Block type data.
-public class Block
-{
-    /// The block's ID (index in the allblocks list)
-    public int blockID;
-    /// The block's name.
-    public string blockName;
-    /// Whether or not the block supports icon smoothing.
-    public bool blockSmoothing = false;
-    /// The block's sprite.
-    public Sprite blockSprite;
-    /// The sound that is played when the block is placed.
-    public AudioClip placeSound;
-    /// The sprite sheet used for smoothing the block.
-    public SpriteSheet spriteSheet;
-
-    public Block(int id, string name, Sprite sprite, AudioClip place, bool smooth)
-    {
-        blockID = id;
-        blockName = name;
-        blockSprite = sprite;
-        placeSound = place;
-        blockSmoothing = smooth;
-        if(smooth) {
-            spriteSheet = new SpriteSheet("Sprites/" + blockSprite.texture.name);
-        }
-    }
-}
-
-// Custom struct for Block type.
-[Serializable]
-public struct BlockType
-{
-    // Main, differing variables for each block type.
-    public string blockName;
-    public Sprite blockSprite;
-    public AudioClip placeSound;
-    public bool blockSmoothing;
 }
