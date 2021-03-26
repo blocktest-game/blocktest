@@ -4,52 +4,52 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -2182124076254010665
-    second: rock_0
+    second: stone_0
   - first:
       213: 2115267796186251350
-    second: rock_1
+    second: stone_1
   - first:
       213: -6546699357316064334
-    second: rock_2
+    second: stone_2
   - first:
       213: 4414985671160336941
-    second: rock_3
+    second: stone_3
   - first:
       213: 6745779496355511533
-    second: rock_4
+    second: stone_4
   - first:
       213: -2490388491417578302
-    second: rock_5
+    second: stone_5
   - first:
       213: -3915639213292744380
-    second: rock_6
+    second: stone_6
   - first:
       213: -3694438686313188348
-    second: rock_7
+    second: stone_7
   - first:
       213: 106130580014269979
-    second: rock_8
+    second: stone_8
   - first:
       213: -8228281083760871512
-    second: rock_9
+    second: stone_9
   - first:
       213: 7270488257456532823
-    second: rock_10
+    second: stone_10
   - first:
       213: 6704783026024054992
-    second: rock_11
+    second: stone_11
   - first:
       213: -3936393870623226224
-    second: rock_12
+    second: stone_12
   - first:
       213: -338637190947198666
-    second: rock_13
+    second: stone_13
   - first:
       213: -8399025901113325242
-    second: rock_14
+    second: stone_14
   - first:
       213: 1582494923448540761
-    second: rock_15
+    second: stone_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,7 +163,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rock_0
+      name: stone_0
       rect:
         serializedVersion: 2
         x: 0
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_1
+      name: stone_1
       rect:
         serializedVersion: 2
         x: 12
@@ -205,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_2
+      name: stone_2
       rect:
         serializedVersion: 2
         x: 24
@@ -226,7 +226,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_3
+      name: stone_3
       rect:
         serializedVersion: 2
         x: 36
@@ -247,7 +247,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_4
+      name: stone_4
       rect:
         serializedVersion: 2
         x: 0
@@ -268,7 +268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_5
+      name: stone_5
       rect:
         serializedVersion: 2
         x: 12
@@ -289,7 +289,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_6
+      name: stone_6
       rect:
         serializedVersion: 2
         x: 24
@@ -310,7 +310,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_7
+      name: stone_7
       rect:
         serializedVersion: 2
         x: 36
@@ -331,7 +331,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_8
+      name: stone_8
       rect:
         serializedVersion: 2
         x: 0
@@ -352,7 +352,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_9
+      name: stone_9
       rect:
         serializedVersion: 2
         x: 12
@@ -373,7 +373,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_10
+      name: stone_10
       rect:
         serializedVersion: 2
         x: 24
@@ -394,7 +394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_11
+      name: stone_11
       rect:
         serializedVersion: 2
         x: 36
@@ -415,7 +415,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_12
+      name: stone_12
       rect:
         serializedVersion: 2
         x: 0
@@ -436,7 +436,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_13
+      name: stone_13
       rect:
         serializedVersion: 2
         x: 12
@@ -457,7 +457,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_14
+      name: stone_14
       rect:
         serializedVersion: 2
         x: 24
@@ -478,7 +478,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock_15
+      name: stone_15
       rect:
         serializedVersion: 2
         x: 36

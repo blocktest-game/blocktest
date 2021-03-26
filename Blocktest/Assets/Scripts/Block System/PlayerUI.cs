@@ -195,7 +195,9 @@ public class PlayerUI : MonoBehaviour
     //          The position of the placed block (world coords)
     private void PlayerPlaceBlock(Block toPlace, bool foreground, Vector2 position)
     {
-        audioSource.PlayOneShot(toPlace.placeSound);
+        if(toPlace.placeSound != null) {
+            audioSource.PlayOneShot(toPlace.placeSound);
+        }
         BuildSystem.PlaceBlockWorld(toPlace, foreground, position);
     }
 

@@ -202,7 +202,7 @@ Transform:
   - {fileID: 1983780301}
   - {fileID: 1505424470}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &663017120
 GameObject:
@@ -807,39 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffcb3ebbccd0fd4f89b04f9b7b70611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allBlockTypes:
-  - blockName: Dirt
-    blockSprite: {fileID: 5634026908348037240, guid: 951ed7f8d9e4c124c9193232b0fc1696, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 1
-  - blockName: Grass
-    blockSprite: {fileID: 7932798033344189819, guid: 6353d084c91515a49b3cee53c7a59502, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 1
-  - blockName: Rock
-    blockSprite: {fileID: -2182124076254010665, guid: 1d96f704e392f7c4a8ed8f0feeebfadc, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 1
-  - blockName: Wood
-    blockSprite: {fileID: 7440981132975211316, guid: 3cfb0cea20edd5a42b52f5ab5d385761, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 1
-  - blockName: Glass
-    blockSprite: {fileID: 21300000, guid: 73b660d84c6282b4b9974ba279041fc2, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 0
-  - blockName: Glass Pane
-    blockSprite: {fileID: -5454635002767789542, guid: 204841cd37d0f3548abffe1f58476c2c, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 1
-  - blockName: Stone Brick
-    blockSprite: {fileID: -585695636921799601, guid: 0695a40b173ab6c46a29fb3f2eec2ffe, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 1
-  - blockName: Log
-    blockSprite: {fileID: -5034061168752090764, guid: b47d7205f00d8df45b64a0fe0932b64e, type: 3}
-    placeSound: {fileID: 8300000, guid: 1c377e62191c65c45bb58e1ebab822f3, type: 3}
-    blockSmoothing: 1
+  allBlocks: []
   blockNames: []
   selectionDropdown: {fileID: 2088312332}
   foregroundTilemap: {fileID: 1983780303}
@@ -2063,57 +2031,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3613805916373815116, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_UpscaleRT
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916373815116, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_CropFrameX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916373815118, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_ForceIntoRT
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916373815118, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: orthographic size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500976, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: backgroundTilemap
-      value: 
-      objectReference: {fileID: 1505424472}
-    - target: {fileID: 3613805916922500976, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: foregroundTilemap
-      value: 
-      objectReference: {fileID: 1983780303}
     - target: {fileID: 3613805916922500976, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: selectionDropdown
       value: 
       objectReference: {fileID: 2088312332}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Size.x
-      value: 0.68207717
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Size.y
-      value: 1.8120098
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.031792283
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500978, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.093995094
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613805916922500979, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3613805916922500982, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3613805916922500982, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: m_LocalPosition.x
