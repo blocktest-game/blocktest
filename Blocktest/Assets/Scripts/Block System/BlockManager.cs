@@ -44,6 +44,7 @@ public class BlockManager : MonoBehaviour {
         {
             Type newBlockType = allBlockTypes[i];
             Block newBlock = (Block)Activator.CreateInstance(newBlockType);
+            newBlock.Initialize();
             if(newBlock.blockID == -1) {
                 newBlock.blockID = i;
             }
