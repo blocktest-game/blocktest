@@ -6,21 +6,23 @@ using UnityEngine.UI;
 
 public static class BuildSystem
 {
-
-    [SerializeField] public static int[,,] currentWorld = new int[Globals.maxX, Globals.maxY, 2];
+    /// <summary>
+    /// An array containing an entry for every block in the world. Used for saving games.
+    /// </summary>
+    public static int[,,] currentWorld = new int[Globals.maxX, Globals.maxY, 2];
 
     /// <summary>
     /// The method called whenever an object is removed.
-    /// </summmary>
-    /// <param name="foreground"> Whether or not the block to be destroyed is in the foreground. </param>
-    /// <param name="position"> The position of the block to destroy (world coords) </param>
+    /// </summary>
+    /// <param name="foreground">Whether or not the block to be destroyed is in the foreground.</param>
+    /// <param name="position">The position of the block to destroy (world coords)</param>
     public static void BreakBlockWorld(bool foreground, Vector2 position) => BreakBlockCell(foreground, Globals.foregroundTilemap.WorldToCell(position));
 
     /// <summary>
     /// The method called whenever an object is removed.
-    /// </summmary>
-    /// <param name="foreground"> Whether or not the block to be destroyed is in the foreground. </param>
-    /// <param name="tilePosition"> The position of the block to destroy (grid coords) </param>
+    /// </summary>
+    /// <param name="foreground">Whether or not the block to be destroyed is in the foreground.</param>
+    /// <param name="tilePosition">The position of the block to destroy (grid coords)</param>
     public static void BreakBlockCell(bool foreground, Vector3Int tilePosition)
     {
         if(foreground && Globals.foregroundTilemap.HasTile(tilePosition)) {
@@ -45,28 +47,20 @@ public static class BuildSystem
 
     }
 
-    //
-    // Summary:
-    //      The method called whenever a block is placed.
-    // Parameters:
-    //      toPlace:
-    //          The block type to place.
-    //      foreground:
-    //          Whether or not the block should be placed in the foreground.
-    //      position:
-    //          The position of the placed block
+    /// <summary>
+    /// The method called whenever a block is placed.
+    /// </summary>
+    /// <param name="toPlace">The block type to place.</param>
+    /// <param name="foreground">Whether or not the block should be placed in the foreground.</param>
+    /// <param name="position">The position of the placed block. (World coords)</param>
     public static void PlaceBlockWorld(Block toPlace, bool foreground, Vector2 position) => PlaceBlockCell(toPlace, foreground, Globals.foregroundTilemap.WorldToCell(position));
 
-    //
-    // Summary:
-    //      The method called whenever a block is placed.
-    // Parameters:
-    //      toPlace:
-    //          The block type to place.
-    //      foreground:
-    //          Whether or not the block should be placed in the foreground.
-    //      position:
-    //          The position of the placed block
+    /// <summary>
+    /// The method called whenever a block is placed.
+    /// </summary>
+    /// <param name="toPlace">The block type to place.</param>
+    /// <param name="foreground">Whether or not the block should be placed in the foreground.</param>
+    /// <param name="position">The position of the placed block. (Grid coords)</param>
     public static void PlaceBlockCell(Block toPlace, bool foreground, Vector3Int tilePosition)
     {
         BlockTile newTile = BlockTile.CreateInstance<BlockTile>();
@@ -86,11 +80,20 @@ public static class BuildSystem
         }
     }
 
+    /// <summary>
+    /// The method called whenever a block is placed.
+    /// </summary>
+    /// <param name="toPlace">The block type to place.</param>
+    /// <param name="foreground">Whether or not the block should be placed in the foreground.</param>
+    /// <param name="tilePosition">The position of the placed block. (Grid coords)</param>
     public static void PlaceBlockCell(Block toPlace, bool foreground, Vector2 tilePosition) => PlaceBlockCell(toPlace, foreground, new Vector3Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y), 0));
 }
 
 public class BlockTile : Tile 
 {
+    /// <summary>
+    /// The type of block this tile is.
+    /// </summary>
     public Block sourceBlock;
 
     public override void RefreshTile(Vector3Int position, ITilemap tilemap)
@@ -129,12 +132,23 @@ public class BlockTile : Tile
         base.GetTileData(position, tilemap, ref tileData);
     }
 
-    private bool HasSmoothableTile(Vector3Int position, ITilemap tilemap) {
-        if(sourceBlock.smoothSelf) { return IsSameBlockType(Globals.GetTile(position, tilemap)); }
+    /// <summary>
+    /// Whether or not the tile at a certain <paramref name="position"/> can smooth with this tile.
+    /// </summary>
+    /// <param name="position">The position of the tile to check for smoothing.</param>
+    /// <param name="tilemap">The tilemap on which the tile you want to check for smoothing is.</param>
+    /// <returns>Whether or not the tile can smooth with this tile.</returns>
+    private bool HasSmoothableTile(Vector3Int position, ITilemap tilemap) 
+    {
+        if(sourceBlock.smoothSelf) { return IsSameTileType(Globals.GetTile(position, tilemap)); }
         return Globals.GetTile(position, tilemap) != null;
     }
 
-    private bool IsSameBlockType(BlockTile otherBlock) => otherBlock?.sourceBlock == sourceBlock;
-    private bool IsSameBlockType(Block otherBlock) => otherBlock == sourceBlock;
+    /// <summary>
+    /// If the tile provided is the same type (references the same block) as the current tile.
+    /// </summary>
+    /// <param name="otherBlock">The other tile to check.</param>
+    /// <returns>Whether or not the other block is the same type as the current tile</returns>
+    private bool IsSameTileType(BlockTile otherTile) => otherTile?.sourceBlock == sourceBlock;
 
 }

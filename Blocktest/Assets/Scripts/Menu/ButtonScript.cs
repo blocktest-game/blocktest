@@ -16,12 +16,14 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] Sprite[] logoBG;
     [SerializeField] Image logo;
 
-    private void Start() {
+    private void Start() 
+    {
         int i = Random.Range(0, logoBG.Length);
         logo.sprite = logoBG[i];
     }
 
-    public void switchState(string newState = "main") {
+    public void SwitchState(string newState = "main")
+    {
         switch(currentState) {
             case "main":
                 titleScreen.SetActive(false);
@@ -47,7 +49,8 @@ public class ButtonScript : MonoBehaviour
         }
     }
 
-    public void exitGame() {
+    public void ExitGame() 
+    {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -55,8 +58,9 @@ public class ButtonScript : MonoBehaviour
 #endif
     }
 
-    public void startSingleplayer() {
-        switchState(null);
+    public void StartSingleplayer() 
+    {
+        SwitchState(null);
         loadingScreen.SetActive(true);
         SceneManager.LoadSceneAsync("MainScene");
     }

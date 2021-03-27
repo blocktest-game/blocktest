@@ -5,19 +5,31 @@ using UnityEngine;
 public static class WorldGen
 {
     public static float stonePercentage = 80;
+    /// <summary>
     /// The type of block used on the lowest layer.
+    /// </summary>
 
     public static Block stoneBlock;
+    /// <summary>
     /// The type of block used on the middle layer.
+    /// </summary>
     public static Block dirtBlock;
+    /// <summary>
     /// The type of block used on the topmost layer.
+    /// </summary>
     public static Block grassBlock;
 
-    /// The terrain seed used.
+    /// <summary>
+    /// The terrain seed used to generate the current world.
+    /// </summary>
     public static float worldSeed;
+    /// <summary>
     /// The "intensity" of the generated area's elevation changes
+    /// </summary>
     static float intensity = 1.0f;
+    /// <summary>
     /// Progress of the generator on the generation
+    /// </summary>
     public static float progress = 0.0f;
 
     public static void GenerateMainMap()
@@ -30,15 +42,21 @@ public static class WorldGen
 #endif
     }
 
+    /// <summary>
+    /// Generates terrain at the specified coordinates with the specified seed
+    /// </summary>
+    /// <param name="startLoc">The starting location for the generator.</param>
+    /// <param name="endLoc">The ending location for the generator.</param>
+    /// <param name="generatorSeed">The random number seed used to get the noise used by the generator. Deafult yields a random seed.</param>
     public static void GenerateWorld(Vector2Int startLoc, Vector2Int endLoc, float generatorSeed = 0.0f) 
     {
         if(generatorSeed == 0.0f) {
             generatorSeed = Random.Range(0.0f, 1000000.0f);
         }
 
-        dirtBlock = Globals.allBlocks[0]; // TODO: Find a way to dynamically reserve certain blocks
-        grassBlock = Globals.allBlocks[1];
-        stoneBlock = Globals.allBlocks[2];
+        dirtBlock = Globals.AllBlocks[0]; // TODO: Find a way to dynamically reserve certain blocks
+        grassBlock = Globals.AllBlocks[1];
+        stoneBlock = Globals.AllBlocks[2];
 
         progress = 0.0f;
         

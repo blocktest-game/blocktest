@@ -878,7 +878,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 298693453}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: switchState
+        m_MethodName: SwitchState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1352,7 +1352,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 298693453}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: switchState
+        m_MethodName: SwitchState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1675,7 +1675,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 298693453}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: switchState
+        m_MethodName: SwitchState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1808,7 +1808,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 298693453}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: switchState
+        m_MethodName: SwitchState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1941,7 +1941,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 298693453}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: startSingleplayer
+        m_MethodName: StartSingleplayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2074,7 +2074,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 298693453}
         m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
-        m_MethodName: exitGame
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

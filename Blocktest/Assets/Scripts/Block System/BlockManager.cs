@@ -9,17 +9,17 @@ using UnityEngine.Tilemaps;
 
 public class BlockManager : MonoBehaviour {
 
-    /// Array to store all blocks created in Start()
+    /// <summary> Array which stores all block instances for referencing as if they were globals. </summary>
     [HideInInspector] public Block[] allBlocks;
-    /// List used to store the names of blocks, the index is the corresponding ID.
+    /// <summary> List used to store the names of blocks. The indexes are the corresponding block's ID. </summary>
     [HideInInspector] public List<string> blockNames;
 
-    /// Dropdown used for item selection
+    /// <summary> Dropdown used for player item selection </summary>
     [SerializeField] Dropdown selectionDropdown;
 
-    /// Tilemap for foreground objects
+    /// <summary> Tilemap for foreground objects </summary>
     [SerializeField] Tilemap foregroundTilemap;
-    /// Tilemap for background (non-dense) objects
+    /// <summary> Tilemap for background (non-dense) objects </summary>
     [SerializeField] Tilemap backgroundTilemap;
 
 
@@ -44,8 +44,6 @@ public class BlockManager : MonoBehaviour {
         {
             Type newBlockType = allBlockTypes[i];
             Block newBlock = (Block)Activator.CreateInstance(newBlockType);
-            Block newBlockTwo = new Block();
-            newBlock.Initialize();
             if(newBlock.blockID == -1) {
                 newBlock.blockID = i;
             }

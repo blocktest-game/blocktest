@@ -96,9 +96,9 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    //
-    // Summary:
-    //      Initialize the cursor block template.
+    /// <summary>
+    /// Initialize the cursor block template.
+    /// </summary>
     private void InitializeCursor()
     {
         if(blockCursor) {
@@ -113,16 +113,16 @@ public class PlayerUI : MonoBehaviour
         }
         if (currentBlock == null) {
             //Ensure the block ID is valid.
-            if (Globals.allBlocks[currentBlockID] != null)
+            if (Globals.AllBlocks[currentBlockID] != null)
             {
-                currentBlock = Globals.allBlocks[currentBlockID];
+                currentBlock = Globals.AllBlocks[currentBlockID];
             }
         }
     }
 
-    //
-    // Summary:
-    //      Toggle build mode on and off.
+    /// <summary>
+    /// Toggle build mode on and off.
+    /// </summary>
     public void ToggleBuild()
     {
         buildMode = !buildMode;
@@ -135,9 +135,9 @@ public class PlayerUI : MonoBehaviour
         if (currentBlock == null)
         {
             //Ensure the block ID is valid.
-            if (Globals.allBlocks[currentBlockID] != null)
+            if (Globals.AllBlocks[currentBlockID] != null)
             {
-                currentBlock = Globals.allBlocks[currentBlockID];
+                currentBlock = Globals.AllBlocks[currentBlockID];
             }
         }
         currentRenderer.color = new Color(1f, 1f, 1f, 1f);
@@ -148,15 +148,13 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    //
-    // Summary:
-    //      Change the player's currently selected block by "cycling" a certain amount of slots.
-    // Parameters:
-    //      slotDelta:
-    //          The amount of slots to "cycle."
+    /// <summary>
+    /// Change the player's currently selected block by "cycling" a certain amount of slots.
+    /// </summary>
+    /// <param name="slotDelta">The amount of slots to "cycle."</param>
     public void CycleBlockSelection(int slotDelta)
     {
-        int totalBlocks = Globals.allBlocks.Length - 1;
+        int totalBlocks = Globals.AllBlocks.Length - 1;
         int newBlockID = currentBlockID + slotDelta;
         if(newBlockID > totalBlocks) {
             newBlockID = 0;
@@ -166,33 +164,27 @@ public class PlayerUI : MonoBehaviour
         ChangeBlockSelection(newBlockID);
     }
 
-    //
-    // Summary:
-    //      Change the player's currently selected block.
-    // Parameters:
-    //      slot:
-    //          The slot to change to.
+    /// <summary>
+    /// Change the player's currently selected block.
+    /// </summary>
+    /// <param name="slot">The slot to change to.</param>
     public void ChangeBlockSelection(int slot)
     {
-        slot = Mathf.Clamp(slot, 0, Globals.allBlocks.Length - 1);
+        slot = Mathf.Clamp(slot, 0, Globals.AllBlocks.Length - 1);
         currentBlockID = slot;
-        currentBlock = Globals.allBlocks[currentBlockID];
+        currentBlock = Globals.AllBlocks[currentBlockID];
         selectionDropdown.captionText.text = currentBlock.blockName;
         if(buildMode) {
             currentRenderer.sprite = currentBlock.blockSprite;
         }
     }
 
-    //
-    // Summary:
-    //      The method called whenever a PLAYER places an object.
-    // Parameters:
-    //      toPlace:
-    //          The block type to place.
-    //      foreground:
-    //          Whether or not the block should be placed in the foreground.
-    //      position:
-    //          The position of the placed block (world coords)
+    /// <summary>
+    /// The method called whenever a PLAYER places an object.
+    /// </summary>
+    /// <param name="toPlace">The block type to place.</param>
+    /// <param name="foreground">Whether or not the block should be placed in the foreground.</param>
+    /// <param name="position">The position of the placed block (world coords)</param>
     private void PlayerPlaceBlock(Block toPlace, bool foreground, Vector2 position)
     {
         if(toPlace.placeSound != null) {
@@ -201,14 +193,11 @@ public class PlayerUI : MonoBehaviour
         BuildSystem.PlaceBlockWorld(toPlace, foreground, position);
     }
 
-    //
-    // Summary:
-    //      The method called whenever a PLAYER tries to break an object.
-    // Parameters:
-    //      foreground:
-    //          Whether or not the block to be destroyed is in the foreground.
-    //      position:
-    //          The position of the block to destroy (world coords)
+    /// <summary>
+    /// The method called whenever a PLAYER tries to break an object.
+    /// </summary>
+    /// <param name="foreground">Whether or not the block to be destroyed is in the foreground.</param>
+    /// <param name="position">The position of the block to destroy (world coords)</param>
     private void PlayerBreakBlock(bool foreground, Vector2 position)
     {
         BuildSystem.BreakBlockWorld(foreground, position);

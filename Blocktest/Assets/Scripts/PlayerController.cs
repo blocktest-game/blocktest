@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    /// Move speed of the player
+    /// <summary> Move speed of the player </summary>
     [SerializeField] float moveSpeed = 1;
-    /// Jump strength of the player
+    /// <summary> Jump strength of the player </summary>
     [SerializeField] float jumpStrength = 7.5f;
-    /// Rigidbody component of the player
+    /// <summary> Rigidbody component of the player </summary>
     private Rigidbody2D playerRigidBody;
-    /// Animator component of the player
+    /// <summary> Animator component of the player </summary>
     private Animator playerAnimator;
-    /// Sprite renderer component of the player
+    /// <summary> Sprite renderer component of the player </summary>
     private SpriteRenderer playerSpriteRenderer;
-    // Start is called before the first frame update
+
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
@@ -22,11 +22,10 @@ public class PlayerController : MonoBehaviour
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        bool onGround = (playerRigidBody.GetContacts(new List<Collider2D>()) > 0); // Checks if the player is colliding with ANYTHING
+        bool onGround = playerRigidBody.GetContacts(new List<Collider2D>()) > 0; // Checks if the player is colliding with ANYTHING
 
         playerAnimator.SetFloat("MoveSpeed", Mathf.Abs(horizontalInput));
         playerAnimator.SetFloat("VerticalSpeed", playerRigidBody.velocity.y);
