@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 1771384453}
   - component: {fileID: 1771384455}
   - component: {fileID: 1771384454}
+  - component: {fileID: 1771384456}
   m_Layer: 5
   m_Name: Version
   m_TagString: Untagged
@@ -1167,7 +1168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Blocktest alpha-0.1.0
+  m_Text: Blocktest Dev
 --- !u!222 &1771384455
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1176,6 +1177,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771384452}
   m_CullTransparentMesh: 1
+--- !u!114 &1771384456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771384452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395d41386f84f7f42bd64513c5027b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textToChange: {fileID: 1771384454}
+  format: Blocktest %V
 --- !u!1 &1877863276
 GameObject:
   m_ObjectHideFlags: 0
