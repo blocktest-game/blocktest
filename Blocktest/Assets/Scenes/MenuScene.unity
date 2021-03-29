@@ -509,10 +509,10 @@ MonoBehaviour:
   multiplayerScreen: {fileID: 1854830237}
   loadingScreen: {fileID: 37902357}
   logoBG:
-  - {fileID: 21300000, guid: 0695a40b173ab6c46a29fb3f2eec2ffe, type: 3}
-  - {fileID: 21300000, guid: 3cfb0cea20edd5a42b52f5ab5d385761, type: 3}
-  - {fileID: 21300000, guid: 1d96f704e392f7c4a8ed8f0feeebfadc, type: 3}
-  - {fileID: 21300000, guid: 951ed7f8d9e4c124c9193232b0fc1696, type: 3}
+  - {fileID: 3849479111998487501, guid: 951ed7f8d9e4c124c9193232b0fc1696, type: 3}
+  - {fileID: 1582494923448540761, guid: 1d96f704e392f7c4a8ed8f0feeebfadc, type: 3}
+  - {fileID: 3271155800642803859, guid: 0695a40b173ab6c46a29fb3f2eec2ffe, type: 3}
+  - {fileID: 8386912431753553608, guid: 3cfb0cea20edd5a42b52f5ab5d385761, type: 3}
   logo: {fileID: 1376231018}
 --- !u!4 &298693454
 Transform:
@@ -1587,7 +1587,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 951ed7f8d9e4c124c9193232b0fc1696, type: 3}
+  m_Sprite: {fileID: 3849479111998487501, guid: 951ed7f8d9e4c124c9193232b0fc1696, type: 3}
   m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
