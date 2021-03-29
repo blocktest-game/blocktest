@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
@@ -17,25 +14,24 @@ public class PlayerUI : MonoBehaviour
     /// The block placement template's audio source
     private AudioSource audioSource;
     /// The sprite to show around the cursor when in destroy mode.
-    [SerializeField] Sprite destroySprite;
+    [SerializeField] private Sprite destroySprite;
 
     /// Whether build mode is on or not.
     public bool buildMode = false;
 
     /// Maximum distance at which the player can place blocks
-    [SerializeField] float maxBuildDistance = 5f;
+    [SerializeField] private float maxBuildDistance = 5f;
     /// Dropdown used for item selection
-    [SerializeField] Dropdown selectionDropdown;
+    [SerializeField] private Dropdown selectionDropdown;
 
-    void Start()
+    private void Start()
     {
         InitializeCursor();
     }
 
-    void Update()
+    private void Update()
     {
-        if(Input.GetKeyDown("e"))
-        {
+        if (Input.GetKeyDown("e")) {
             ToggleBuild();
         }
 
@@ -43,16 +39,14 @@ public class PlayerUI : MonoBehaviour
         Vector3 worldTilePosition = Globals.CellToWorld(tilePosition) + Globals.foregroundTilemap.cellSize / 2;
         blockCursor.transform.position = Globals.CellToWorld(tilePosition) + Globals.foregroundTilemap.cellSize / 2;
 
-        if(Vector2.Distance(worldTilePosition, gameObject.transform.position) > maxBuildDistance) {
+        if (Vector2.Distance(worldTilePosition, gameObject.transform.position) > maxBuildDistance) {
             currentRenderer.color = new Color(1f, 0f, 0f, 0.7f);
             return;
         }
 
-        if(buildMode) 
-        {
+        if (buildMode) {
             float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-            if(scrollInput != 0)
-            {
+            if (scrollInput != 0) {
                 // Change ID by -1 if scroll input is greater than zero, otherwise change ID by +1.
                 CycleBlockSelection(scrollInput > 0 ? -1 : 1);
             }
@@ -62,15 +56,15 @@ public class PlayerUI : MonoBehaviour
             bool canBuildForeground = Globals.GetTile(tilePosition, true) == null;
             bool canBuildBackground = Globals.GetTile(tilePosition, false) == null;
 
-            if(canBuildForeground) {
-                if(Physics2D.BoxCast(worldTilePosition, Globals.foregroundTilemap.cellSize / 2, 0, Vector2.zero).collider != null){
+            if (canBuildForeground) {
+                if (Physics2D.BoxCast(worldTilePosition, Globals.foregroundTilemap.cellSize / 2, 0, Vector2.zero).collider != null) {
                     canBuildForeground = false;
                 }
             }
 
-            if(!canBuildForeground) {
+            if (!canBuildForeground) {
                 currentRenderer.color = new Color(1f, 0f, 0f, 0.7f); // Red if you can't build on the foreground
-            } else if(!canBuildBackground) {
+            } else if (!canBuildBackground) {
                 currentRenderer.color = new Color(0f, 0f, 1f, 0.7f); // Blue if you can't build on the background, but can build in the foreground
             } else {
                 currentRenderer.color = new Color(0.5f, 1f, 0.5f, 0.7f); // Otherwise, normal coloring
@@ -78,20 +72,17 @@ public class PlayerUI : MonoBehaviour
 
             if (canBuildForeground && Input.GetMouseButton(0)) {
                 PlayerPlaceBlock(currentBlock, true, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            } 
-            else if (canBuildBackground && Input.GetMouseButton(1)) {
+            } else if (canBuildBackground && Input.GetMouseButton(1)) {
                 PlayerPlaceBlock(currentBlock, false, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
 
-        }
-        else
-        {
-            if(Input.GetMouseButton(0)) {
+        } else {
+            if (Input.GetMouseButton(0)) {
                 PlayerBreakBlock(true, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            } else if(Input.GetMouseButton(1)) {
+            } else if (Input.GetMouseButton(1)) {
                 PlayerBreakBlock(false, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
-            
+
         }
 
     }
@@ -101,20 +92,19 @@ public class PlayerUI : MonoBehaviour
     /// </summary>
     private void InitializeCursor()
     {
-        if(blockCursor) {
+        if (blockCursor) {
             Destroy(blockCursor);
         }
         blockCursor = new GameObject("BlockCursor");
         currentRenderer = blockCursor.AddComponent<SpriteRenderer>();
         audioSource = blockCursor.AddComponent<AudioSource>();
         currentRenderer.sortingOrder = 10;
-        if(!buildMode) {
+        if (!buildMode) {
             currentRenderer.sprite = destroySprite;
         }
         if (currentBlock == null) {
             //Ensure the block ID is valid.
-            if (Globals.AllBlocks[currentBlockID] != null)
-            {
+            if (Globals.AllBlocks[currentBlockID] != null) {
                 currentBlock = Globals.AllBlocks[currentBlockID];
             }
         }
@@ -126,22 +116,19 @@ public class PlayerUI : MonoBehaviour
     public void ToggleBuild()
     {
         buildMode = !buildMode;
-        if (blockCursor == null)
-        {
+        if (blockCursor == null) {
             InitializeCursor();
         }
 
         //Set the current block.
-        if (currentBlock == null)
-        {
+        if (currentBlock == null) {
             //Ensure the block ID is valid.
-            if (Globals.AllBlocks[currentBlockID] != null)
-            {
+            if (Globals.AllBlocks[currentBlockID] != null) {
                 currentBlock = Globals.AllBlocks[currentBlockID];
             }
         }
         currentRenderer.color = new Color(1f, 1f, 1f, 1f);
-        if(buildMode) {
+        if (buildMode) {
             currentRenderer.sprite = currentBlock.blockSprite;
         } else {
             currentRenderer.sprite = destroySprite;
@@ -156,9 +143,9 @@ public class PlayerUI : MonoBehaviour
     {
         int totalBlocks = Globals.AllBlocks.Length - 1;
         int newBlockID = currentBlockID + slotDelta;
-        if(newBlockID > totalBlocks) {
+        if (newBlockID > totalBlocks) {
             newBlockID = 0;
-        } else if(newBlockID < 0) {
+        } else if (newBlockID < 0) {
             newBlockID = totalBlocks;
         }
         ChangeBlockSelection(newBlockID);
@@ -174,7 +161,7 @@ public class PlayerUI : MonoBehaviour
         currentBlockID = slot;
         currentBlock = Globals.AllBlocks[currentBlockID];
         selectionDropdown.captionText.text = currentBlock.blockName;
-        if(buildMode) {
+        if (buildMode) {
             currentRenderer.sprite = currentBlock.blockSprite;
         }
     }
@@ -187,7 +174,7 @@ public class PlayerUI : MonoBehaviour
     /// <param name="position">The position of the placed block (world coords)</param>
     private void PlayerPlaceBlock(Block toPlace, bool foreground, Vector2 position)
     {
-        if(toPlace.placeSound != null) {
+        if (toPlace.placeSound != null) {
             audioSource.PlayOneShot(toPlace.placeSound);
         }
         BuildSystem.PlaceBlockWorld(toPlace, foreground, position);

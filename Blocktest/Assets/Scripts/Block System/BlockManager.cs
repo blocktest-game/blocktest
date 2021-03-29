@@ -1,13 +1,13 @@
 // System required for [Serializable] attribute.
 using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
-public class BlockManager : MonoBehaviour {
+public class BlockManager : MonoBehaviour
+{
 
     /// <summary> Array which stores all block instances for referencing as if they were globals. </summary>
     [HideInInspector] public Block[] allBlocks;
@@ -15,12 +15,12 @@ public class BlockManager : MonoBehaviour {
     [HideInInspector] public List<string> blockNames;
 
     /// <summary> Dropdown used for player item selection </summary>
-    [SerializeField] Dropdown selectionDropdown;
+    [SerializeField] private Dropdown selectionDropdown;
 
     /// <summary> Tilemap for foreground objects </summary>
-    [SerializeField] Tilemap foregroundTilemap;
+    [SerializeField] private Tilemap foregroundTilemap;
     /// <summary> Tilemap for background (non-dense) objects </summary>
-    [SerializeField] Tilemap backgroundTilemap;
+    [SerializeField] private Tilemap backgroundTilemap;
 
 
     private void Awake()
@@ -40,17 +40,16 @@ public class BlockManager : MonoBehaviour {
         allBlocks = new Block[allBlockTypes.Length];
 
         // For loops to populate main allBlocks array.
-        for (int i = 0; i < allBlockTypes.Length; i++)
-        {
+        for (int i = 0; i < allBlockTypes.Length; i++) {
             Type newBlockType = allBlockTypes[i];
             Block newBlock = (Block)Activator.CreateInstance(newBlockType);
             newBlock.Initialize();
-            if(newBlock.blockID == -1) {
+            if (newBlock.blockID == -1) {
                 newBlock.blockID = i;
             }
-            if(allBlocks[newBlock.blockID] != null) {
+            if (allBlocks[newBlock.blockID] != null) {
                 Debug.LogWarning("Block " + newBlock + " conflicts with block " + allBlocks[newBlock.blockID] + "! (Block ID: " + newBlock.blockID + ")");
-            } else if(newBlock.blockID > allBlocks.Length || newBlock.blockID < 0) {
+            } else if (newBlock.blockID > allBlocks.Length || newBlock.blockID < 0) {
                 Debug.LogWarning("Block " + newBlock + " has invalid ID " + newBlock.blockID + "! (Max ID " + allBlocks.Length + ")");
             }
             blockNames.Add(newBlock.blockName);

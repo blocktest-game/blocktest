@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Block
@@ -33,16 +31,16 @@ public class Block
     /// <remarks>
     /// DO NOT FORGET TO CALL THE BASE METHOD IF YOU OVERRIDE THIS.
     /// </remarks>
-    public virtual void Initialize() 
+    public virtual void Initialize()
     {
         string path = "Sprites/Blocks/" + blockName.ToLower().Replace(" ", null);
         blockSprite = Resources.Load<Sprite>(path);
-        if(blockSprite == null) {
+        if (blockSprite == null) {
             Debug.Log("Block " + this + " does not have an icon at " + path + "!");
         }
-        if(blockSmoothing) {
+        if (blockSmoothing) {
             spriteSheet = new SpriteSheet(path);
-            if(spriteSheet.spritesDict.Count <= 1) {
+            if (spriteSheet.spritesDict.Count <= 1) {
                 Debug.Log("Block " + this + " is marked as smoothable, but a sprite sheet could not be found at " + path + "!");
             }
         }
@@ -53,7 +51,7 @@ public class Block
     /// </summary>
     /// <param name="position">The position of the block being placed.</param>
     /// <param name="foreground">Whether the block being placed is in the foreground or not.</param>
-    public virtual void OnPlace(Vector3Int position, bool foreground) 
+    public virtual void OnPlace(Vector3Int position, bool foreground)
     {
 
     }
@@ -62,7 +60,7 @@ public class Block
     /// </summary>
     /// <param name="position">The position of the block being broken.</param>
     /// <param name="foreground">Whether the block being broken is in the foreground or not.</param>
-    public virtual void OnBreak(Vector3Int position, bool foreground) 
+    public virtual void OnBreak(Vector3Int position, bool foreground)
     {
 
     }

@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-static class Globals {
+static class Globals
+{
     /// <summary> The global block manager instance. </summary>
     public static BlockManager blockManager;
     /// <summary> Array which stores all block instances for referencing as if they were globals. </summary>

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class WorldGen
@@ -23,10 +21,11 @@ public static class WorldGen
     /// The terrain seed used to generate the current world.
     /// </summary>
     public static float worldSeed;
+
     /// <summary>
     /// The "intensity" of the generated area's elevation changes
     /// </summary>
-    static float intensity = 1.0f;
+    private static float intensity = 1.0f;
     /// <summary>
     /// Progress of the generator on the generation
     /// </summary>
@@ -48,9 +47,9 @@ public static class WorldGen
     /// <param name="startLoc">The starting location for the generator.</param>
     /// <param name="endLoc">The ending location for the generator.</param>
     /// <param name="generatorSeed">The random number seed used to get the noise used by the generator. Deafult yields a random seed.</param>
-    public static void GenerateWorld(Vector2Int startLoc, Vector2Int endLoc, float generatorSeed = 0.0f) 
+    public static void GenerateWorld(Vector2Int startLoc, Vector2Int endLoc, float generatorSeed = 0.0f)
     {
-        if(generatorSeed == 0.0f) {
+        if (generatorSeed == 0.0f) {
             generatorSeed = Random.Range(0.0f, 1000000.0f);
         }
 
@@ -59,29 +58,26 @@ public static class WorldGen
         stoneBlock = Globals.AllBlocks[2];
 
         progress = 0.0f;
-        
+
         for (int xi = startLoc.x; xi < endLoc.x; xi++) {
             float x = ((float)xi + 1) / 10;
             float result = Mathf.PerlinNoise(x * intensity + generatorSeed, generatorSeed);
             int height = Mathf.RoundToInt(Mathf.Clamp01(result / 8 + 0.875f) * (endLoc.y / 2)); // Gets the height of the column
             float stoneResult = Mathf.PerlinNoise(x * 2 * intensity + generatorSeed, generatorSeed);
-            int stoneHeight = Mathf.RoundToInt((Mathf.Clamp01(stoneResult / 8 + 0.875f)) * ((float)height * (stonePercentage / 100)));
+            int stoneHeight = Mathf.RoundToInt((Mathf.Clamp01(stoneResult / 8 + 0.875f)) * (height * (stonePercentage / 100)));
 
             for (int yi = startLoc.y; yi < endLoc.y; yi++) {
                 Block toPlace;
-                if(yi < stoneHeight) {
+                if (yi < stoneHeight) {
                     toPlace = stoneBlock;
-                }
-                else if(yi < height) {
+                } else if (yi < height) {
                     toPlace = dirtBlock;
-                }
-                else if(yi == height) {
+                } else if (yi == height) {
                     toPlace = grassBlock;
-                    if(xi == Mathf.RoundToInt(endLoc.x / 2)) {
+                    if (xi == Mathf.RoundToInt(endLoc.x / 2)) {
                         GameObject.Find("Player").transform.position += Globals.CellToWorld(new Vector2(xi, yi + 5));
                     }
-                }
-                else {
+                } else {
                     continue;
                 }
 

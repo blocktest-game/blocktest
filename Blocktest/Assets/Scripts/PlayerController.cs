@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     /// <summary> Move speed of the player </summary>
-    [SerializeField] float moveSpeed = 1;
+    [SerializeField] private float moveSpeed = 1;
     /// <summary> Jump strength of the player </summary>
-    [SerializeField] float jumpStrength = 7.5f;
+    [SerializeField] private float jumpStrength = 7.5f;
     /// <summary> Rigidbody component of the player </summary>
     private Rigidbody2D playerRigidBody;
     /// <summary> Animator component of the player </summary>
@@ -15,14 +14,14 @@ public class PlayerController : MonoBehaviour
     /// <summary> Sprite renderer component of the player </summary>
     private SpriteRenderer playerSpriteRenderer;
 
-    void Start()
+    private void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         bool onGround = playerRigidBody.GetContacts(new List<Collider2D>()) > 0; // Checks if the player is colliding with ANYTHING
@@ -30,17 +29,17 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetFloat("MoveSpeed", Mathf.Abs(horizontalInput));
         playerAnimator.SetFloat("VerticalSpeed", playerRigidBody.velocity.y);
 
-        if(horizontalInput != 0){
+        if (horizontalInput != 0) {
             playerRigidBody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidBody.velocity.y);
 
-            if(horizontalInput > 0) {
+            if (horizontalInput > 0) {
                 playerSpriteRenderer.flipX = false;
             } else {
                 playerSpriteRenderer.flipX = true;
             }
 
         }
-        if(Input.GetButtonDown("Jump") && onGround) {
+        if (Input.GetButtonDown("Jump") && onGround) {
             playerRigidBody.AddForce(Vector2.up * jumpStrength, ForceMode2D.Impulse);
         }
     }

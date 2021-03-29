@@ -807,7 +807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffcb3ebbccd0fd4f89b04f9b7b70611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allBlocks: []
   blockNames: []
   selectionDropdown: {fileID: 2088312332}
   foregroundTilemap: {fileID: 1983780303}

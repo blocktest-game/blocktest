@@ -1,22 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonScript : MonoBehaviour
 {
     private string currentState = "main";
 
-    [SerializeField] GameObject titleScreen;
-    [SerializeField] GameObject singleplayerScreen;
-    [SerializeField] GameObject multiplayerScreen;
-    [SerializeField] GameObject loadingScreen;
+    [SerializeField] private GameObject titleScreen;
+    [SerializeField] private GameObject singleplayerScreen;
+    [SerializeField] private GameObject multiplayerScreen;
+    [SerializeField] private GameObject loadingScreen;
 
-    [SerializeField] Sprite[] logoBG;
-    [SerializeField] Image logo;
+    [SerializeField] private Sprite[] logoBG;
+    [SerializeField] private Image logo;
 
-    private void Start() 
+    private void Start()
     {
         int i = Random.Range(0, logoBG.Length);
         logo.sprite = logoBG[i];
@@ -24,7 +22,7 @@ public class ButtonScript : MonoBehaviour
 
     public void SwitchState(string newState = "main")
     {
-        switch(currentState) {
+        switch (currentState) {
             case "main":
                 titleScreen.SetActive(false);
                 break;
@@ -36,7 +34,7 @@ public class ButtonScript : MonoBehaviour
                 break;
         }
         currentState = newState;
-        switch (newState){
+        switch (newState) {
             case "main":
                 titleScreen.SetActive(true);
                 break;
@@ -49,7 +47,7 @@ public class ButtonScript : MonoBehaviour
         }
     }
 
-    public void ExitGame() 
+    public void ExitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -58,7 +56,7 @@ public class ButtonScript : MonoBehaviour
 #endif
     }
 
-    public void StartSingleplayer() 
+    public void StartSingleplayer()
     {
         SwitchState(null);
         loadingScreen.SetActive(true);

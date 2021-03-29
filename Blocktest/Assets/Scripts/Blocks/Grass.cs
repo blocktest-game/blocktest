@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Grass : Block {
+public class Grass : Block
+{
     public override void Initialize()
     {
         blockName = "Grass";

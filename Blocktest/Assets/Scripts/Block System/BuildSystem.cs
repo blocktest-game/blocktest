@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 public static class BuildSystem
 {
@@ -25,7 +23,7 @@ public static class BuildSystem
     /// <param name="tilePosition">The position of the block to destroy (grid coords)</param>
     public static void BreakBlockCell(bool foreground, Vector3Int tilePosition)
     {
-        if(foreground && Globals.foregroundTilemap.HasTile(tilePosition)) {
+        if (foreground && Globals.foregroundTilemap.HasTile(tilePosition)) {
             BlockTile prevTile = Globals.GetTile(tilePosition, foreground);
             prevTile.sourceBlock.OnBreak(tilePosition, true);
 
@@ -41,7 +39,7 @@ public static class BuildSystem
 
         Tilemap tilemap = foreground ? Globals.foregroundTilemap : Globals.backgroundTilemap;
 
-        foreach (Vector3Int loc in new List<Vector3Int>(){Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right}) { // Refreshes all blocks in cardinal dirs
+        foreach (Vector3Int loc in new List<Vector3Int>() { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right }) { // Refreshes all blocks in cardinal dirs
             tilemap.RefreshTile(tilePosition + loc);
         }
 
@@ -69,11 +67,11 @@ public static class BuildSystem
         newTile.name = toPlace.blockName;
         toPlace.OnPlace(tilePosition, foreground);
 
-        if(foreground) {
+        if (foreground) {
             newTile.colliderType = Tile.ColliderType.Grid;
             Globals.foregroundTilemap.SetTile(tilePosition, newTile);
             currentWorld[tilePosition.x, tilePosition.y, 0] = toPlace.blockID + 1;
-        } else if(toPlace.canPlaceBackground) {
+        } else if (toPlace.canPlaceBackground) {
             newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
             Globals.backgroundTilemap.SetTile(tilePosition, newTile);
             currentWorld[tilePosition.x, tilePosition.y, 1] = toPlace.blockID + 1;
@@ -89,7 +87,7 @@ public static class BuildSystem
     public static void PlaceBlockCell(Block toPlace, bool foreground, Vector2 tilePosition) => PlaceBlockCell(toPlace, foreground, new Vector3Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y), 0));
 }
 
-public class BlockTile : Tile 
+public class BlockTile : Tile
 {
     /// <summary>
     /// The type of block this tile is.
@@ -99,8 +97,8 @@ public class BlockTile : Tile
     public override void RefreshTile(Vector3Int position, ITilemap tilemap)
     {
         base.RefreshTile(position, tilemap);
-        foreach(Vector3Int dir in new List<Vector3Int>() {Vector3Int.up, Vector3Int.down, Vector3Int.right, Vector3Int.left}) {
-            if(HasSmoothableTile(position + dir, tilemap)) {
+        foreach (Vector3Int dir in new List<Vector3Int>() { Vector3Int.up, Vector3Int.down, Vector3Int.right, Vector3Int.left }) {
+            if (HasSmoothableTile(position + dir, tilemap)) {
                 tilemap.RefreshTile(position + dir); // This doesn't actuall call this same method, but the followind GetTileData() method, so don't worry about infinite loops.
             }
         }
@@ -108,23 +106,23 @@ public class BlockTile : Tile
 
     public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
     {
-        if(!sourceBlock.blockSmoothing || (sourceBlock.spriteSheet == null)) { 
+        if (!sourceBlock.blockSmoothing || (sourceBlock.spriteSheet == null)) {
             base.GetTileData(position, tilemap, ref tileData);
-            return; 
+            return;
         } // If the tile doesn't or can't smooth, don't even try
 
         int bitmask = 0; // Using bitmask smoothing, look it up
 
-        if(HasSmoothableTile(position + Vector3Int.up, tilemap)) {
+        if (HasSmoothableTile(position + Vector3Int.up, tilemap)) {
             bitmask += 1;
         }
-        if(HasSmoothableTile(position + Vector3Int.down, tilemap)) {
+        if (HasSmoothableTile(position + Vector3Int.down, tilemap)) {
             bitmask += 2;
         }
-        if(HasSmoothableTile(position + Vector3Int.right, tilemap)) {
+        if (HasSmoothableTile(position + Vector3Int.right, tilemap)) {
             bitmask += 4;
         }
-        if(HasSmoothableTile(position + Vector3Int.left, tilemap)) {
+        if (HasSmoothableTile(position + Vector3Int.left, tilemap)) {
             bitmask += 8;
         }
 
@@ -138,9 +136,9 @@ public class BlockTile : Tile
     /// <param name="position">The position of the tile to check for smoothing.</param>
     /// <param name="tilemap">The tilemap on which the tile you want to check for smoothing is.</param>
     /// <returns>Whether or not the tile can smooth with this tile.</returns>
-    private bool HasSmoothableTile(Vector3Int position, ITilemap tilemap) 
+    private bool HasSmoothableTile(Vector3Int position, ITilemap tilemap)
     {
-        if(sourceBlock.smoothSelf) { return IsSameTileType(Globals.GetTile(position, tilemap)); }
+        if (sourceBlock.smoothSelf) { return IsSameTileType(Globals.GetTile(position, tilemap)); }
         return Globals.GetTile(position, tilemap) != null;
     }
 
