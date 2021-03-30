@@ -1,22 +1,20 @@
 name: Build project
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - '*'
 
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-
 jobs:
-  createRelease:
+  prepareBuild:
     name: Create Release
     runs-on: ubuntu-latest
     outputs:
-      upload_url: ${{ steps.createReleaseStep.outputs.upload_url }}
+      upload_url: ${{ steps.createRelease.outputs.upload_url }}
     steps:
       - name: Create Release
-        id: createReleaseStep
+        id: createRelease
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -29,7 +27,7 @@ jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
-    needs: createRelease
+    needs: prepareBuild
     strategy:
       fail-fast: false
       matrix:
@@ -51,6 +49,14 @@ jobs:
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
 
+      - name: Setup license
+        env:
+          LICENSE_FILE_PATH: ./.github/License.ulf
+        run: |
+          echo 'UNITY_LICENSE<<LICENSE-EOF' >> "$GITHUB_ENV"
+          cat "$LICENSE_FILE_PATH" >> "$GITHUB_ENV"
+          printf "\nLICENSE-EOF" >> "$GITHUB_ENV"
+
       - uses: game-ci/unity-builder@v2
         id: build
         with:
@@ -70,7 +76,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ needs.createRelease.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ needs.prepareBuild.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./Build-${{ matrix.targetPlatform }}.zip
           asset_name: Build-${{ matrix.targetPlatform }}.zip
           asset_content_type: application/zip
