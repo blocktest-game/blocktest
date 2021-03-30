@@ -2096,6 +2096,10 @@ PrefabInstance:
       propertyPath: selectionDropdown
       value: 
       objectReference: {fileID: 2088312332}
+    - target: {fileID: 3613805916922500979, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3613805916922500982, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: m_RootOrder
       value: 2
