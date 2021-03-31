@@ -34,6 +34,9 @@ public class PlayerUI : MonoBehaviour
         if (Input.GetKeyDown("e")) {
             ToggleBuild();
         }
+        if(Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S)) {
+            PlayerSaveLevel(0);
+        }
 
         Vector3Int tilePosition = Globals.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         Vector3 worldTilePosition = Globals.CellToWorld(tilePosition) + Globals.foregroundTilemap.cellSize / 2;
@@ -188,6 +191,14 @@ public class PlayerUI : MonoBehaviour
     private void PlayerBreakBlock(bool foreground, Vector2 position)
     {
         BuildSystem.BreakBlockWorld(foreground, position);
+    }
+
+    public void PlayerLoadLevel(int saveIndex) {
+        SaveSystem.LoadGame(saveIndex);
+    }
+
+    public void PlayerSaveLevel(int saveIndex) {
+        SaveSystem.SaveGame(saveIndex);
     }
 
 }

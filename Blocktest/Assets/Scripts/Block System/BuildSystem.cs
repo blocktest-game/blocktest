@@ -85,6 +85,32 @@ public static class BuildSystem
     /// <param name="foreground">Whether or not the block should be placed in the foreground.</param>
     /// <param name="tilePosition">The position of the placed block. (Grid coords)</param>
     public static void PlaceBlockCell(Block toPlace, bool foreground, Vector2 tilePosition) => PlaceBlockCell(toPlace, foreground, new Vector3Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y), 0));
+
+    public static void PlaceIDsCells(int[] blockIDList, bool foreground, Vector3Int[] tilePositions)
+    {
+        BlockTile[] tilesToPlace = new BlockTile[blockIDList.Length];
+        for(int i = 0; i < blockIDList.Length; i++) {
+            if(blockIDList[i] == 0) { continue; }
+            BlockTile newTile = BlockTile.CreateInstance<BlockTile>();
+            Vector3Int tilePosition = tilePositions[i];
+            Block toPlace = Globals.AllBlocks[blockIDList[i] - 1];
+            newTile.sourceBlock = toPlace;
+            newTile.sprite = toPlace.blockSprite;
+            newTile.name = toPlace.blockName;
+
+            if(foreground) {
+                newTile.colliderType = Tile.ColliderType.Grid;
+            } else {
+                newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            }
+            tilesToPlace[i] = newTile;
+        }
+        if(foreground) {
+            Globals.foregroundTilemap.SetTiles(tilePositions, tilesToPlace);
+        } else {
+            Globals.backgroundTilemap.SetTiles(tilePositions, tilesToPlace);
+        }
+    }
 }
 
 public class BlockTile : Tile
