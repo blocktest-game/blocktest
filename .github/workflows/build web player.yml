@@ -9,7 +9,6 @@ jobs:
   buildWebPlayer:
     name: Build for WebGL
     runs-on: ubuntu-latest
-    needs: prepareBuild
     steps:
       - uses: actions/checkout@v2
         with:
@@ -37,7 +36,7 @@ jobs:
           targetPlatform: WebGL
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           BRANCH: gh-pages
           CLEAN: true
