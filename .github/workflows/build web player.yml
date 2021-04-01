@@ -36,7 +36,7 @@ jobs:
           targetPlatform: WebGL
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           BRANCH: gh-pages
           CLEAN: true
