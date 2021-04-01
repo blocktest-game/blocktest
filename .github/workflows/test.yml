@@ -2,7 +2,7 @@ name: Test Project
 
 on:
   pull_request: {}
-  push: { branches: [master, dev] }
+  push: { branches: [master, dev, web-build-test] }
 
 jobs:
 #   # Request license file job
