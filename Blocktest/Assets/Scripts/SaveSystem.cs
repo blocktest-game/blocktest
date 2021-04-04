@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -15,7 +13,7 @@ static class SaveSystem
         Vector3 playerPos3 = GameObject.Find("Player").transform.position;
         float[] playerPos = new float[3] {playerPos3.x, playerPos3.y, playerPos3.z};
 
-        SaveData save = new SaveData(Globals.blockManager.blockNames, playerPos, BuildSystem.currentWorld);
+        SaveData save = new SaveData(playerPos, BuildSystem.currentWorld);
 
         formatter.Serialize(stream, save);
         stream.Close();
@@ -62,14 +60,12 @@ static class SaveSystem
 [System.Serializable]
 public class SaveData
 {
-    public List<string> blockNames;
     public DateTime createDate;
     public DateTime saveDate;
     public float[] playerPosition;
     public int[,,] worldData;
-    public SaveData(List<string> blockNames, float[] playerPosition, int[,,] worldData)
+    public SaveData(float[] playerPosition, int[,,] worldData)
     {
-        this.blockNames = blockNames;
         this.playerPosition = playerPosition;
         this.worldData = worldData;
         this.saveDate = DateTime.Now;

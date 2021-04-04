@@ -12,7 +12,7 @@ public class BlockManager : MonoBehaviour
     /// <summary> Array which stores all block instances for referencing as if they were globals. </summary>
     [HideInInspector] public Block[] allBlocks;
     /// <summary> List used to store the names of blocks. The indexes are the corresponding block's ID. </summary>
-    [HideInInspector] public List<string> blockNames;
+    [HideInInspector] public string[] blockNames;
 
     /// <summary> Dropdown used for player item selection </summary>
     [SerializeField] private Dropdown selectionDropdown;
@@ -38,6 +38,7 @@ public class BlockManager : MonoBehaviour
                         select assemblyType).ToArray();
 
         allBlocks = new Block[allBlockTypes.Length];
+        blockNames = new string[allBlockTypes.Length];
 
         // For loops to populate main allBlocks array.
         for (int i = 0; i < allBlockTypes.Length; i++) {
@@ -52,10 +53,10 @@ public class BlockManager : MonoBehaviour
             } else if (newBlock.blockID > allBlocks.Length || newBlock.blockID < 0) {
                 Debug.LogWarning("Block " + newBlock + " has invalid ID " + newBlock.blockID + "! (Max ID " + allBlocks.Length + ")");
             }
-            blockNames.Add(newBlock.blockName);
+            blockNames[newBlock.blockID] = newBlock.blockName;
             allBlocks[newBlock.blockID] = newBlock;
         }
-        selectionDropdown.AddOptions(blockNames);
+        selectionDropdown.AddOptions(blockNames.ToList());
         WorldGen.GenerateMainMap(); // TODO: Move this to some sort of global initialization method
     }
 }
