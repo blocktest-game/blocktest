@@ -21,6 +21,7 @@ public class BlockManager : MonoBehaviour
     [SerializeField] private Tilemap foregroundTilemap;
     /// <summary> Tilemap for background (non-dense) objects </summary>
     [SerializeField] private Tilemap backgroundTilemap;
+    [SerializeField] public GameObject defaultPlayerPrefab;
 
 
     private void Awake()

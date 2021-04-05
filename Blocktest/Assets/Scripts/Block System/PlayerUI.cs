@@ -21,8 +21,6 @@ public class PlayerUI : MonoBehaviour
 
     /// Maximum distance at which the player can place blocks
     [SerializeField] private float maxBuildDistance = 5f;
-    /// Dropdown used for item selection
-    [SerializeField] private Dropdown selectionDropdown;
 
     private void Start()
     {
@@ -163,7 +161,6 @@ public class PlayerUI : MonoBehaviour
         slot = Mathf.Clamp(slot, 0, Globals.AllBlocks.Length - 1);
         currentBlockID = slot;
         currentBlock = Globals.AllBlocks[currentBlockID];
-        selectionDropdown.captionText.text = currentBlock.blockName;
         if (buildMode) {
             currentRenderer.sprite = currentBlock.blockSprite;
         }

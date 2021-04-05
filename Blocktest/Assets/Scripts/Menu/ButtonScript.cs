@@ -14,6 +14,13 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] private Sprite[] logoBG;
     [SerializeField] private Image logo;
 
+    [SerializeField] private InputField worldSeed;
+
+    [SerializeField] private Sprite[] characterSprites;
+    [SerializeField] private GameObject[] characterPrefabs;
+    [SerializeField] private Image characterPreview;
+    [SerializeField] private int currentCharacterSprite = 0;
+
     private void Start()
     {
         int i = Random.Range(0, logoBG.Length);
@@ -59,8 +66,27 @@ public class ButtonScript : MonoBehaviour
     public void StartSingleplayer()
     {
         SwitchState(null);
+        Globals.characterPrefab = characterPrefabs[currentCharacterSprite];
+        Globals.characterColor = characterPreview.color;
         loadingScreen.SetActive(true);
         SceneManager.LoadSceneAsync("MainScene");
+    }
+
+    public void SetWorldSeed(string inputSeed) {
+        float newSeed;
+        if (float.TryParse(inputSeed, out newSeed)) {
+            Globals.worldSeed = Mathf.Clamp(newSeed, 0.0f, 1000000.0f);
+        }
+    } 
+
+    public void ChangeCharSprite(int delta = 1) {
+        currentCharacterSprite += delta;
+        if (currentCharacterSprite >= characterSprites.Length) {
+            currentCharacterSprite = 0;
+        } else if (currentCharacterSprite < 0) {
+            currentCharacterSprite = characterSprites.Length - 1;
+        }
+        characterPreview.sprite = characterSprites[currentCharacterSprite];
     }
 
 }

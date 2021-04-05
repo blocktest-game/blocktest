@@ -18,11 +18,6 @@ public static class WorldGen
     public static Block grassBlock;
 
     /// <summary>
-    /// The terrain seed used to generate the current world.
-    /// </summary>
-    public static float worldSeed;
-
-    /// <summary>
     /// The "intensity" of the generated area's elevation changes
     /// </summary>
     private static float intensity = 1.0f;
@@ -33,11 +28,14 @@ public static class WorldGen
 
     public static void GenerateMainMap()
     {
-        worldSeed = Random.Range(0.0f, 1000000.0f);
+        if(Globals.worldSeed == 0.0f) {
+            Globals.worldSeed = Random.Range(0.0f, 1000000.0f);
+        }
+        
 #if UNITY_EDITOR // Generates a much smaller map if you're in the editor for sanity reasons
-        GenerateWorld(new Vector2Int(0, 0), new Vector2Int(128, 128), worldSeed);
+        GenerateWorld(new Vector2Int(0, 0), new Vector2Int(128, 128), Globals.worldSeed);
 #else
-        GenerateWorld(new Vector2Int(0, 0), new Vector2Int(510, 255), worldSeed);
+        GenerateWorld(new Vector2Int(0, 0), new Vector2Int(510, 255), Globals.worldSeed);
 #endif
     }
 
@@ -75,7 +73,7 @@ public static class WorldGen
                 } else if (yi == height) {
                     toPlace = grassBlock;
                     if (xi == Mathf.RoundToInt(endLoc.x / 2)) {
-                        GameObject.Find("Player").transform.position += Globals.CellToWorld(new Vector2(xi, yi + 5));
+                        Globals.InitializePlayer(Globals.CellToWorld(new Vector2(xi, yi + 5))); // Rather bad place to put this, but we can manage for now
                     }
                 } else {
                     continue;

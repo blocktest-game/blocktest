@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +16,18 @@ static class Globals
     public static int maxX = 510;
     /// <summary> The maximum world size. (Height) </summary>
     public static int maxY = 255;
+
+
+    // Variables related to world creation/loading
+
+    /// <summary> The terrain seed used to generate the current world. </summary>
+    public static float worldSeed = 0.0f;
+    /// <summary> The sprite the character is using. </summary>
+    public static GameObject characterPrefab;
+    /// <summary> The actual player object. </summary>
+    public static GameObject characterObject;
+    /// <summary> The player's chosen color. </summary>
+    public static Color characterColor = Color.white;
 
     /// <summary>
     /// Helper method for converting from cell position to world position
@@ -51,4 +64,18 @@ static class Globals
     /// <param name="tilemap"></param>
     public static BlockTile GetTile(Vector3Int position, ITilemap tilemap) => tilemap.GetTile<BlockTile>(position);
 
+    /// <summary>
+    /// Initializes the player at a specific location.
+    /// </summary>
+    /// <param name="position">The position at which to spawn the player.</param>
+    public static void InitializePlayer(Vector3 position) {
+        GameObject player;
+        if(characterPrefab == null) { 
+            player = GameObject.Instantiate(blockManager.defaultPlayerPrefab, position, blockManager.defaultPlayerPrefab.transform.rotation);
+        } else {
+            player = GameObject.Instantiate(characterPrefab, position, characterPrefab.transform.rotation);
+        }
+        player.GetComponent<SpriteRenderer>().color = Globals.characterColor;
+        characterObject = player;
+    }
 }
