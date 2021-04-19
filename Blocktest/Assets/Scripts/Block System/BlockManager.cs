@@ -23,7 +23,6 @@ public class BlockManager : MonoBehaviour
     [SerializeField] private Tilemap backgroundTilemap;
     [SerializeField] public GameObject defaultPlayerPrefab;
 
-
     private void Awake()
     {
         // Add this to the global variable
@@ -60,4 +59,16 @@ public class BlockManager : MonoBehaviour
         selectionDropdown.AddOptions(blockNames.ToList());
         WorldGen.GenerateMainMap(); // TODO: Move this to some sort of global initialization method
     }
+
+    // Code bandaid for saving
+    public void PlayerLoadLevel() {
+        SaveSystem.LoadGame(0);
+    }
+
+    public void PlayerSaveLevel() {
+        SaveSystem.SaveGame(0);
+    }
+
+    // disgusting
+    public void ChangeBlockSelection(int slot) => Globals.characterObject.GetComponent<PlayerUI>().ChangeBlockSelection(slot);
 }

@@ -10,7 +10,7 @@ static class SaveSystem
         string path = Application.persistentDataPath + "/savegame-" + saveIndex + ".bt";
 
         FileStream stream = new FileStream(path, FileMode.Create);
-        Vector3 playerPos3 = GameObject.Find("Player").transform.position;
+        Vector3 playerPos3 = Globals.characterObject.transform.position;
         float[] playerPos = new float[3] {playerPos3.x, playerPos3.y, playerPos3.z};
 
         SaveData save = new SaveData(playerPos, BuildSystem.currentWorld);
@@ -47,7 +47,7 @@ static class SaveSystem
 
             BuildSystem.PlaceIDsCells(blocksToPlaceFore, true, positions);
             BuildSystem.PlaceIDsCells(blocksToPlaceBack, false, positions);
-            GameObject.Find("Player").transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
+            Globals.characterObject.transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
             BuildSystem.currentWorld = data.worldData;
 
         } else
