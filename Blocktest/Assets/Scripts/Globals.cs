@@ -1,8 +1,8 @@
-using Unity.Mathematics;
+using BlockSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-static class Globals
+public class Globals
 {
     /// <summary> The global block manager instance. </summary>
     public static BlockManager blockManager;
@@ -42,7 +42,7 @@ static class Globals
     /// <summary>
     /// Helper method for converting from world position to approximate cell position
     /// </summary>
-    /// <param name="cellLocation">The location to convert to cell coordinates</param>
+    /// <param name="worldLocation">The location to convert to cell coordinates</param>
     public static Vector3Int WorldToCell(Vector2 worldLocation) => foregroundTilemap.WorldToCell(worldLocation);
 
     /// <summary>
@@ -70,11 +70,7 @@ static class Globals
     /// <param name="position">The position at which to spawn the player.</param>
     public static void InitializePlayer(Vector3 position) {
         GameObject player;
-        if(characterPrefab == null) { 
-            player = GameObject.Instantiate(blockManager.defaultPlayerPrefab, position, blockManager.defaultPlayerPrefab.transform.rotation);
-        } else {
-            player = GameObject.Instantiate(characterPrefab, position, characterPrefab.transform.rotation);
-        }
+        player = characterPrefab == null ? Object.Instantiate(blockManager.defaultPlayerPrefab, position, blockManager.defaultPlayerPrefab.transform.rotation) : Object.Instantiate(characterPrefab, position, characterPrefab.transform.rotation);
         player.GetComponent<SpriteRenderer>().color = Globals.characterColor;
         characterObject = player;
     }

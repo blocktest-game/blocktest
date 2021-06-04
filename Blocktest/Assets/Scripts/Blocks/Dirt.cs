@@ -1,10 +1,15 @@
-public class Dirt : Block
+using BlockSystem;
+
+namespace Blocks
 {
-    public override void Initialize()
+    public class Dirt : Block
     {
-        blockName = "Dirt";
-        blockID = 0;
-        blockSmoothing = true;
-        base.Initialize();
+        public override void Initialize()
+        {
+            blockName = "Dirt";
+            blockID = 0;
+            blockSmoothing = true;
+            base.Initialize();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using BlockSystem;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -11,7 +12,7 @@ static class SaveSystem
 
         FileStream stream = new FileStream(path, FileMode.Create);
         Vector3 playerPos3 = Globals.characterObject.transform.position;
-        float[] playerPos = new float[3] {playerPos3.x, playerPos3.y, playerPos3.z};
+        float[] playerPos = new float[] {playerPos3.x, playerPos3.y, playerPos3.z};
 
         SaveData save = new SaveData(playerPos, BuildSystem.currentWorld);
 
@@ -30,6 +31,8 @@ static class SaveSystem
             SaveData data = formatter.Deserialize(stream) as SaveData;
 
             stream.Close();
+            
+            if (data is null) { return; }
 
             int[] blocksToPlaceFore = new int[Globals.maxX * Globals.maxY];
             int[] blocksToPlaceBack = new int[Globals.maxX * Globals.maxY];
@@ -57,7 +60,7 @@ static class SaveSystem
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class SaveData
 {
     public DateTime createDate;

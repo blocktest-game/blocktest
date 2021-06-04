@@ -1,10 +1,15 @@
-public class Grass : Block
+using BlockSystem;
+
+namespace Blocks
 {
-    public override void Initialize()
+    public class Grass : Block
     {
-        blockName = "Grass";
-        blockID = 1;
-        blockSmoothing = true;
-        base.Initialize();
+        public override void Initialize()
+        {
+            blockName = "Grass";
+            blockID = 1;
+            blockSmoothing = true;
+            base.Initialize();
+        }
     }
 }

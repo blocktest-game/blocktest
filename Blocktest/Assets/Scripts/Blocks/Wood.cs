@@ -1,10 +1,15 @@
-public class Wood : Block
+using BlockSystem;
+
+namespace Blocks
 {
-    public override void Initialize()
+    public class Wood : Block
     {
-        blockName = "Wood";
-        blockID = 3;
-        blockSmoothing = true;
-        base.Initialize();
+        public override void Initialize()
+        {
+            blockName = "Wood";
+            blockID = 3;
+            blockSmoothing = true;
+            base.Initialize();
+        }
     }
 }

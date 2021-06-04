@@ -1,11 +1,16 @@
-public class GlassPane : Block
+using BlockSystem;
+
+namespace Blocks
 {
-    public override void Initialize()
+    public class GlassPane : Block
     {
-        blockName = "Glass Pane";
-        blockID = 5;
-        blockSmoothing = true;
-        smoothSelf = true;
-        base.Initialize();
+        public override void Initialize()
+        {
+            blockName = "Glass Pane";
+            blockID = 5;
+            blockSmoothing = true;
+            smoothSelf = true;
+            base.Initialize();
+        }
     }
 }

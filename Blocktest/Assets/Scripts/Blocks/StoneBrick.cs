@@ -1,10 +1,15 @@
-public class StoneBrick : Block
+using BlockSystem;
+
+namespace Blocks
 {
-    public override void Initialize()
+    public class StoneBrick : Block
     {
-        blockName = "Stone Brick";
-        blockID = 7;
-        blockSmoothing = true;
-        base.Initialize();
+        public override void Initialize()
+        {
+            blockName = "Stone Brick";
+            blockID = 7;
+            blockSmoothing = true;
+            base.Initialize();
+        }
     }
 }

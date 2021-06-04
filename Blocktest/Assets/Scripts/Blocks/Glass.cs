@@ -1,10 +1,15 @@
-public class Glass : Block
+using BlockSystem;
+
+namespace Blocks
 {
-    public override void Initialize()
+    public class Glass : Block
     {
-        blockName = "Glass";
-        blockID = 4;
-        blockSmoothing = false;
-        base.Initialize();
+        public override void Initialize()
+        {
+            blockName = "Glass";
+            blockID = 4;
+            blockSmoothing = false;
+            base.Initialize();
+        }
     }
 }

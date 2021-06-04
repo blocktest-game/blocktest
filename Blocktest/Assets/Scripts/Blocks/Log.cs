@@ -1,10 +1,15 @@
-public class Log : Block
+using BlockSystem;
+
+namespace Blocks
 {
-    public override void Initialize()
+    public class Log : Block
     {
-        blockName = "Log";
-        blockID = 6;
-        blockSmoothing = true;
-        base.Initialize();
+        public override void Initialize()
+        {
+            blockName = "Log";
+            blockID = 6;
+            blockSmoothing = true;
+            base.Initialize();
+        }
     }
 }
