@@ -7,11 +7,13 @@ using UnityEngine;
 /// The SpriteSheet class. See <see cref="spritesDict"/> for the sprites retrieved in the sprite sheet.
 /// </summary>
 [Serializable]
-public class SpriteSheet : IEquatable<SpriteSheet>
+public struct SpriteSheet : IEquatable<SpriteSheet>
 {
-    /// <summary>The dictionary of subsprites retrieved from the texture, with the index being the name of the subsprite.</summary>
-    private readonly Dictionary<string, Sprite> spritesDict = new Dictionary<string, Sprite>();
+    /// <summary>The dictionary of sub-sprites retrieved from the texture, with the index being the name of the sub-sprite.</summary>
+    private readonly Dictionary<string, Sprite> spritesDict;
+    /// <summary> An array of sub-sprites in the spritesheet. </summary>
     private readonly Sprite[] sprites;
+    /// <summary> The "length" or total amount of sprites </summary>
     public int Length => sprites.Length;
 
     /// <summary>
@@ -25,6 +27,7 @@ public class SpriteSheet : IEquatable<SpriteSheet>
     {
         string path = texturePath.Replace("Assets/Resources/", null);
         sprites = Resources.LoadAll<Sprite>(path);
+        spritesDict = new Dictionary<string, Sprite>();
         foreach (Sprite sprite in sprites) {
             spritesDict[sprite.name] = sprite;
         }
@@ -35,7 +38,7 @@ public class SpriteSheet : IEquatable<SpriteSheet>
     
     public bool Equals(SpriteSheet other)
     {
-        return other is { } && (ReferenceEquals(this, other) || Equals(sprites, other.sprites));
+        return other is { } && (Equals(sprites, other.sprites));
     }
     
     public override int GetHashCode()
