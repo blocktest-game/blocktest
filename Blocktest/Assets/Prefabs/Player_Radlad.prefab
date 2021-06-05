@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 5dbc5e892f240a74da21a18ee01b9a86, type: 2}
+    - target: {fileID: 599135766860656146, guid: a78d10faadf79b04aba9097c259c19e6, type: 3}
+      propertyPath: species
+      value: radlad
+      objectReference: {fileID: 0}
     - target: {fileID: 599135766860656147, guid: a78d10faadf79b04aba9097c259c19e6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -65,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 599135766860656152, guid: a78d10faadf79b04aba9097c259c19e6, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player_Radlad
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78d10faadf79b04aba9097c259c19e6, type: 3}

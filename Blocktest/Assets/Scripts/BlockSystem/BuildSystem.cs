@@ -9,14 +9,14 @@ namespace BlockSystem
         /// <summary>
         /// An array containing an entry for every block in the world. Used for saving games.
         /// </summary>
-        public static int[,,] currentWorld = new int[Globals.maxX, Globals.maxY, 2];
+        public static int[,,] currentWorld = new int[Globals.instance.maxX, Globals.instance.maxY, 2];
 
         /// <summary>
         /// The method called whenever an object is removed.
         /// </summary>
         /// <param name="foreground">Whether or not the block to be destroyed is in the foreground.</param>
         /// <param name="position">The position of the block to destroy (world coords)</param>
-        public static void BreakBlockWorld(bool foreground, Vector2 position) => BreakBlockCell(foreground, Globals.foregroundTilemap.WorldToCell(position));
+        public static void BreakBlockWorld(bool foreground, Vector2 position) => BreakBlockCell(foreground, Globals.instance.foregroundTilemap.WorldToCell(position));
 
         /// <summary>
         /// The method called whenever an object is removed.
@@ -26,27 +26,27 @@ namespace BlockSystem
         public static void BreakBlockCell(bool foreground, Vector3Int tilePosition)
         {
             switch (foreground) {
-                case true when Globals.foregroundTilemap.HasTile(tilePosition):
+                case true when Globals.instance.foregroundTilemap.HasTile(tilePosition):
                 {
-                    BlockTile prevTile = Globals.GetTile(tilePosition, true);
+                    BlockTile prevTile = Globals.instance.GetTile(tilePosition, true);
                     prevTile.sourceBlock.OnBreak(tilePosition, true);
 
-                    Globals.foregroundTilemap.SetTile(tilePosition, null);
+                    Globals.instance.foregroundTilemap.SetTile(tilePosition, null);
                     currentWorld[tilePosition.x, tilePosition.y, 0] = 0;
                     break;
                 }
-                case false when Globals.backgroundTilemap.HasTile(tilePosition):
+                case false when Globals.instance.backgroundTilemap.HasTile(tilePosition):
                 {
-                    BlockTile prevTile = Globals.GetTile(tilePosition, false);
+                    BlockTile prevTile = Globals.instance.GetTile(tilePosition, false);
                     prevTile.sourceBlock.OnBreak(tilePosition, false);
 
-                    Globals.backgroundTilemap.SetTile(tilePosition, null);
+                    Globals.instance.backgroundTilemap.SetTile(tilePosition, null);
                     currentWorld[tilePosition.x, tilePosition.y, 1] = 0;
                     break;
                 }
             }
 
-            Tilemap tilemap = foreground ? Globals.foregroundTilemap : Globals.backgroundTilemap;
+            Tilemap tilemap = foreground ? Globals.instance.foregroundTilemap : Globals.instance.backgroundTilemap;
 
             foreach (Vector3Int loc in new List<Vector3Int>() { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right }) { // Refreshes all blocks in cardinal dirs
                 tilemap.RefreshTile(tilePosition + loc);
@@ -60,7 +60,7 @@ namespace BlockSystem
         /// <param name="toPlace">The block type to place.</param>
         /// <param name="foreground">Whether or not the block should be placed in the foreground.</param>
         /// <param name="position">The position of the placed block. (World coords)</param>
-        public static void PlaceBlockWorld(Block toPlace, bool foreground, Vector2 position) => PlaceBlockCell(toPlace, foreground, Globals.foregroundTilemap.WorldToCell(position));
+        public static void PlaceBlockWorld(Block toPlace, bool foreground, Vector2 position) => PlaceBlockCell(toPlace, foreground, Globals.instance.foregroundTilemap.WorldToCell(position));
 
         /// <summary>
         /// The method called whenever a block is placed.
@@ -78,11 +78,11 @@ namespace BlockSystem
 
             if (foreground) {
                 newTile.colliderType = Tile.ColliderType.Grid;
-                Globals.foregroundTilemap.SetTile(tilePosition, newTile);
+                Globals.instance.foregroundTilemap.SetTile(tilePosition, newTile);
                 currentWorld[tilePosition.x, tilePosition.y, 0] = toPlace.blockID + 1;
             } else if (toPlace.canPlaceBackground) {
                 newTile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-                Globals.backgroundTilemap.SetTile(tilePosition, newTile);
+                Globals.instance.backgroundTilemap.SetTile(tilePosition, newTile);
                 currentWorld[tilePosition.x, tilePosition.y, 1] = toPlace.blockID + 1;
             }
         }
@@ -102,7 +102,7 @@ namespace BlockSystem
                 if(blockIDList[i] == 0) { continue; }
                 BlockTile newTile = ScriptableObject.CreateInstance<BlockTile>();
                 Vector3Int tilePosition = tilePositions[i];
-                Block toPlace = Globals.AllBlocks[blockIDList[i] - 1];
+                Block toPlace = Globals.instance.AllBlocks[blockIDList[i] - 1];
                 newTile.sourceBlock = toPlace;
                 newTile.sprite = toPlace.blockSprite;
                 newTile.name = toPlace.blockName;
@@ -116,9 +116,9 @@ namespace BlockSystem
                 toPlace.OnPlace(tilePosition, foreground);
             }
             if(foreground) {
-                Globals.foregroundTilemap.SetTiles(tilePositions, tilesToPlace);
+                Globals.instance.foregroundTilemap.SetTiles(tilePositions, tilesToPlace);
             } else {
-                Globals.backgroundTilemap.SetTiles(tilePositions, tilesToPlace);
+                Globals.instance.backgroundTilemap.SetTiles(tilePositions, tilesToPlace);
             }
         }
     }
@@ -140,7 +140,7 @@ namespace BlockSystem
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
-            if (!sourceBlock.blockSmoothing || (sourceBlock.spriteSheet == null)) {
+            if (!sourceBlock.blockSmoothing || (sourceBlock.spriteSheet is null)) {
                 base.GetTileData(position, tilemap, ref tileData);
                 return;
             } // If the tile doesn't or can't smooth, don't even try
@@ -160,7 +160,7 @@ namespace BlockSystem
                 bitmask += 8;
             }
 
-            sprite = sourceBlock.spriteSheet.spritesDict[sourceBlock.blockSprite.texture.name + "_" + bitmask];
+            sprite = sourceBlock.spriteSheet[sourceBlock.blockSprite.texture.name + "_" + bitmask];
             base.GetTileData(position, tilemap, ref tileData);
         }
 
@@ -172,8 +172,8 @@ namespace BlockSystem
         /// <returns>Whether or not the tile can smooth with this tile.</returns>
         private bool HasSmoothableTile(Vector3Int position, ITilemap tilemap)
         {
-            if (sourceBlock.smoothSelf) { return IsSameTileType(Globals.GetTile(position, tilemap)); }
-            return Globals.GetTile(position, tilemap) != null;
+            if (sourceBlock.smoothSelf) { return IsSameTileType(Globals.instance.GetTile(position, tilemap)); }
+            return Globals.instance.GetTile(position, tilemap) is { };
         }
 
         /// <summary>

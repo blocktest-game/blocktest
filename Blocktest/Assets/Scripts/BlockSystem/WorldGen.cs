@@ -1,3 +1,4 @@
+using Blocks;
 using UnityEngine;
 
 namespace BlockSystem
@@ -23,10 +24,6 @@ namespace BlockSystem
         /// The "intensity" of the generated area's elevation changes
         /// </summary>
         private static float intensity = 1.0f;
-        /// <summary>
-        /// Progress of the generator on the generation
-        /// </summary>
-        public static float progress;
 
         public static void GenerateMainMap()
         {
@@ -53,11 +50,9 @@ namespace BlockSystem
                 generatorSeed = Random.Range(0.0f, 1000000.0f);
             }
 
-            dirtBlock = Globals.AllBlocks[0]; // TODO: Find a way to dynamically reserve certain blocks
-            grassBlock = Globals.AllBlocks[1];
-            stoneBlock = Globals.AllBlocks[2];
-
-            progress = 0.0f;
+            dirtBlock = Block.Instance<Dirt>();
+            grassBlock = Block.Instance<Grass>();
+            stoneBlock = Block.Instance<Stone>();
 
             for (int xi = startLoc.x; xi < endLoc.x; xi++) {
                 float x = ((float)xi + 1) / 10;
@@ -75,7 +70,7 @@ namespace BlockSystem
                     } else if (yi == height) {
                         toPlace = grassBlock;
                         if (xi == Mathf.RoundToInt(endLoc.x / 2.0f)) {
-                            Globals.InitializePlayer(Globals.CellToWorld(new Vector2(xi, yi + 5))); // Rather bad place to put this, but we can manage for now
+                            Globals.instance.InitializePlayer(Globals.instance.CellToWorld(new Vector3(xi, yi + 5, -10))); // TODO: Move this to globals somehow
                         }
                     } else {
                         continue;
@@ -83,7 +78,6 @@ namespace BlockSystem
 
                     BuildSystem.PlaceBlockCell(toPlace, true, new Vector2(xi, yi));
                     BuildSystem.PlaceBlockCell(toPlace, false, new Vector2(xi, yi));
-                    //progress += 1.0f / ((float)maxX + (float)maxY); // Add progress to the progress var
                 }
             }
         }

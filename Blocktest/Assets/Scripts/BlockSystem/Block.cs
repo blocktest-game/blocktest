@@ -37,12 +37,12 @@ namespace BlockSystem
         {
             string path = "Sprites/Blocks/" + blockName.ToLower().Replace(" ", null);
             blockSprite = Resources.Load<Sprite>(path);
-            if (blockSprite == null) {
+            if (blockSprite is null) {
                 Debug.Log("Block " + this + " does not have an icon at " + path + "!");
             }
             if (!blockSmoothing) { return; }
             spriteSheet = new SpriteSheet(path);
-            if (spriteSheet.spritesDict.Count <= 1) {
+            if (spriteSheet.Length <= 1) {
                 Debug.Log("Block " + this + " is marked as smoothable, but a sprite sheet could not be found at " + path + "!");
             }
         }
@@ -56,6 +56,7 @@ namespace BlockSystem
         {
 
         }
+        
         /// <summary>
         /// Called whenever a block is broken.
         /// </summary>
@@ -66,5 +67,15 @@ namespace BlockSystem
 
         }
 
+        /// <summary>
+        /// Gets the singleton instance of the block specified in param T.
+        /// </summary>
+        /// <typeparam name="T">The block type to get the instance of,</typeparam>
+        /// <returns>The block instance as it's own type.</returns>
+        public static T Instance<T>()
+        where T : Block
+        {
+            return (T)Globals.instance.blockManager.blockDict[typeof(T)];
+        }
     }
 }

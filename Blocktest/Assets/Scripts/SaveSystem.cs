@@ -34,14 +34,14 @@ static class SaveSystem
             
             if (data is null) { return; }
 
-            int[] blocksToPlaceFore = new int[Globals.maxX * Globals.maxY];
-            int[] blocksToPlaceBack = new int[Globals.maxX * Globals.maxY];
-            Vector3Int[] positions = new Vector3Int[Globals.maxX * Globals.maxY];
-            for (int x = 0; x < Globals.maxX; x++) {
-                for (int y = 0; y < Globals.maxY; y++) {
-                    Globals.foregroundTilemap.ClearAllTiles();
-                    Globals.backgroundTilemap.ClearAllTiles();
-                    int i = x * Globals.maxY + y;
+            int[] blocksToPlaceFore = new int[Globals.instance.maxX * Globals.instance.maxY];
+            int[] blocksToPlaceBack = new int[Globals.instance.maxX * Globals.instance.maxY];
+            Vector3Int[] positions = new Vector3Int[Globals.instance.maxX * Globals.instance.maxY];
+            for (int x = 0; x < Globals.instance.maxX; x++) {
+                for (int y = 0; y < Globals.instance.maxY; y++) {
+                    Globals.instance.foregroundTilemap.ClearAllTiles();
+                    Globals.instance.backgroundTilemap.ClearAllTiles();
+                    int i = x * Globals.instance.maxY + y;
                     positions[i] = new Vector3Int(x, y, 0);
                     if(data.worldData[x, y, 0] != 0) {blocksToPlaceFore[i] = data.worldData[x, y, 0];}
                     if(data.worldData[x, y, 1] != 0) {blocksToPlaceBack[i] = data.worldData[x, y, 1];}

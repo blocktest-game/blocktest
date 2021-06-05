@@ -63,9 +63,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3613805916922500983, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
+      propertyPath: species
+      value: lizard
+      objectReference: {fileID: 0}
     - target: {fileID: 3613805916922500989, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player_Lizard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}

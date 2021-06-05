@@ -11,22 +11,11 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] private GameObject multiplayerScreen;
     [SerializeField] private GameObject loadingScreen;
 
-    [SerializeField] private Sprite[] logoBG;
-    [SerializeField] private Image logo;
-
-    [SerializeField] private InputField worldSeed;
-
     [SerializeField] private Sprite[] characterSprites;
     [SerializeField] private GameObject[] characterPrefabs;
     [SerializeField] private Image characterPreview;
-    [SerializeField] private int currentCharacterSprite = 0;
-
-    private void Start()
-    {
-        int i = Random.Range(0, logoBG.Length);
-        logo.sprite = logoBG[i];
-    }
-
+    [SerializeField] private int currentCharacterSprite;
+    
     public void SwitchState(string newState = "main")
     {
         switch (currentState) {
@@ -73,8 +62,7 @@ public class ButtonScript : MonoBehaviour
     }
 
     public void SetWorldSeed(string inputSeed) {
-        float newSeed;
-        if (float.TryParse(inputSeed, out newSeed)) {
+        if (float.TryParse(inputSeed, out float newSeed)) {
             Globals.worldSeed = Mathf.Clamp(newSeed, 0.0f, 1000000.0f);
         }
     } 

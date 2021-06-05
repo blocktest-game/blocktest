@@ -9,8 +9,8 @@ using static UnityEngine.Mathf;
 [ExecuteInEditMode, RequireComponent(typeof(Image))]
 public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    private const float recip2Pi = 0.159154943f;
-    private const string colorPickerShaderName = "UI/ColorPicker";
+    private const float Recip2Pi = 0.159154943f;
+    private const string ColorPickerShaderName = "UI/ColorPicker";
 
     private static readonly int _HSV             = Shader.PropertyToID(nameof(_HSV));
     private static readonly int _AspectRatio     = Shader.PropertyToID(nameof(_AspectRatio));
@@ -21,7 +21,7 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     [SerializeField] Image colorToSet;
     private Material generatedMaterial;
 
-    private enum PointerDownLocation { HueCircle, SVSquare, Outside }
+    private enum PointerDownLocation { HueCircle, SvSquare, Outside }
     private PointerDownLocation pointerDownLocation = PointerDownLocation.Outside;
 
     private RectTransform rectTransform;
@@ -29,7 +29,7 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
     float h, s, v;
 
-    public Color color
+    public Color Color
     {
         get { return Color.HSVToRGB(h, s, v); }
         set {
@@ -50,12 +50,11 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
         if (WrongShader())
         {
-            Debug.LogWarning($"Color picker requires image material with {colorPickerShaderName} shader.");
+            Debug.LogWarning($"Color picker requires image material with {ColorPickerShaderName} shader.");
 
-            if (Application.isPlaying && colorPickerShader != null)
+            if (Application.isPlaying && colorPickerShader is { })
             {
-                generatedMaterial = new Material(colorPickerShader);
-                generatedMaterial.hideFlags = HideFlags.HideAndDontSave;
+                generatedMaterial = new Material(colorPickerShader) { hideFlags = HideFlags.HideAndDontSave };
             }
 
             image.material = generatedMaterial;
@@ -68,17 +67,17 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
     private void Reset()
     {
-        colorPickerShader = Shader.Find(colorPickerShaderName);
+        colorPickerShader = Shader.Find(ColorPickerShaderName);
     }
 
     private bool WrongShader()
     {
-        return image?.material?.shader?.name != colorPickerShaderName;
+        return image.material.shader.name != ColorPickerShaderName;
     }
 
     private void Update()
     {
-        if (WrongShader()) return;
+        if (WrongShader()) { return; }
 
         var rect = rectTransform.rect;
 
@@ -87,29 +86,33 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (WrongShader()) return;
+        if (WrongShader()) {
+            return;
+        }
 
         var pos = GetRelativePosition(eventData);
 
         if (pointerDownLocation == PointerDownLocation.HueCircle)
         {
-            h = (Atan2(pos.y, pos.x) * recip2Pi + 1) % 1;
+            h = (Atan2(pos.y, pos.x) * Recip2Pi + 1) % 1;
             ApplyColor();
         }
 
-        if (pointerDownLocation == PointerDownLocation.SVSquare)
-        {
-            var size = image.material.GetFloat(_SVSquareSize);
-
-            s = InverseLerp(-size, size, pos.x);
-            v = InverseLerp(-size, size, pos.y);
-            ApplyColor();
+        if (pointerDownLocation != PointerDownLocation.SvSquare) {
+            return;
         }
+        var size = image.material.GetFloat(_SVSquareSize);
+
+        s = InverseLerp(-size, size, pos.x);
+        v = InverseLerp(-size, size, pos.y);
+        ApplyColor();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (WrongShader()) return;
+        if (WrongShader()) {
+            return;
+        }
 
         var pos = GetRelativePosition(eventData);
 
@@ -118,7 +121,7 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         if (r < .5f && r > image.material.GetFloat(_HueCircleInner))
         {
             pointerDownLocation = PointerDownLocation.HueCircle;
-            h = (Atan2(pos.y, pos.x) * recip2Pi + 1) % 1;
+            h = (Atan2(pos.y, pos.x) * Recip2Pi + 1) % 1;
             ApplyColor();
         }
         else
@@ -128,7 +131,7 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
             // s -> x, v -> y
             if (pos.x >= -size && pos.x <= size && pos.y >= -size && pos.y <= size)
             {
-                pointerDownLocation = PointerDownLocation.SVSquare;
+                pointerDownLocation = PointerDownLocation.SvSquare;
                 s = InverseLerp(-size, size, pos.x);
                 v = InverseLerp(-size, size, pos.y);
                 ApplyColor();
@@ -144,15 +147,16 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     private void ApplyColor()
     {
         image.material.SetVector(_HSV, new Vector3(h, s, v));
-        colorToSet.color = color;
+        colorToSet.color = Color;
 
-        onColorChanged?.Invoke(color);
+        onColorChanged?.Invoke(Color);
     }
 
     private void OnDestroy()
     {
-        if (generatedMaterial != null)
+        if (generatedMaterial is { }) {
             DestroyImmediate(generatedMaterial);
+        }
     }
 
     /// <summary>
@@ -162,9 +166,7 @@ public class ColorPicker : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         var rect = GetSquaredRect();
 
-        Vector2 rtPos;
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out rtPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out Vector2 rtPos);
 
         return new Vector2(InverseLerpUnclamped(rect.xMin, rect.xMax, rtPos.x), InverseLerpUnclamped(rect.yMin, rect.yMax, rtPos.y)) - Vector2.one * 0.5f;
     }

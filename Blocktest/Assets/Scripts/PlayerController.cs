@@ -8,38 +8,40 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpStrength = 7.5f;
     /// <summary> Layer for touchable blocks </summary>
     [SerializeField] private LayerMask groundLayer;
+    /// <summary> The player's species name, used to determine sprites </summary>
+    /// <remarks> Sprites should be formatted like: <c>player_[action]_[species]</c> (e.g. <c>player_walk_lizard</c>).</remarks>
+    [SerializeField] private string species = "human";
     /// <summary> Rigidbody component of the player </summary>
     private Rigidbody2D playerRigidBody;
     /// <summary> Hitbox of the player </summary>
     private BoxCollider2D playerHitbox;
     /// <summary> Animator component of the player </summary>
-    private Animator playerAnimator;
-    /// <summary> Sprite renderer component of the player </summary>
-    private SpriteRenderer playerSpriteRenderer;
-    /// <summary> These are faster than using the string every time </summary>
-    private static readonly int MoveSpeed = Animator.StringToHash("MoveSpeed");
-    private static readonly int VerticalSpeed = Animator.StringToHash("VerticalSpeed");
+    private SpriteAnimator playerAnimator;
+
+    /// <summary> The spritesheet used when the player is moving </summary>
+    private SpriteSheet moveSheet;
+    /// <summary> The spritesheet used when the player is standing still </summary>
+    private SpriteSheet idleSheet;
 
     private void Start()
     {
+        playerAnimator = GetComponent<SpriteAnimator>();
         playerRigidBody = GetComponent<Rigidbody2D>();
-        playerAnimator = GetComponent<Animator>();
-        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerHitbox = GetComponent<BoxCollider2D>();
+        moveSheet = new SpriteSheet("Sprites/player_walk_" + species);
+        idleSheet = new SpriteSheet("Sprites/player_" + species);
     }
 
     private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        playerAnimator.SetFloat(MoveSpeed, Mathf.Abs(horizontalInput));
-        playerAnimator.SetFloat(VerticalSpeed, playerRigidBody.velocity.y);
+        playerAnimator.SetAnimation(Mathf.Abs((horizontalInput)) > 0 ? moveSheet : idleSheet);
 
         if (horizontalInput != 0) {
             playerRigidBody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidBody.velocity.y);
 
-            playerSpriteRenderer.flipX = !(horizontalInput > 0);
-
+            gameObject.transform.localScale = new Vector3(Mathf.Sign(horizontalInput), 1, 1);
         }
         if (Input.GetButtonDown("Jump")) {
             TryJump();
@@ -76,9 +78,10 @@ public class PlayerController : MonoBehaviour
         Vector2 groundBoxSize = new Vector2(bounds.size.x - 0.1f, 0.1f);
 
         // Check if the area directly under the player's hitbox is occupied by something in the ground layer. Return true if yes, false if no.
-        return Physics2D.OverlapBox(groundBoxCenter, groundBoxSize, 0f, groundLayer) != null;
+        return Physics2D.OverlapBox(groundBoxCenter, groundBoxSize, 0f, groundLayer) is { };
     }
 
+/*
     private bool OnCeiling()        // Bonk
     {
         // Holds the center location of the ceiling detecting box, the center top of the hitbox
@@ -88,9 +91,10 @@ public class PlayerController : MonoBehaviour
 
         Vector2 groundBoxSize = new Vector2(bounds.size.x - 0.1f, 0.1f);
 
-        // Check if the area directly over the player's hitbox is occupied by something in the groundlayer. Return true if yes, false if no.
-        return Physics2D.OverlapBox(groundBoxCenter, groundBoxSize, 0f, groundLayer) != null;
+        // Check if the area directly over the player's hitbox is occupied by something in the ground layer. Return true if yes, false if no.
+        return Physics2D.OverlapBox(groundBoxCenter, groundBoxSize, 0f, groundLayer) is { };
     }
+*/
 
     private bool OnWallRight()
     {
@@ -101,8 +105,8 @@ public class PlayerController : MonoBehaviour
 
         Vector2 wallBoxSize = new Vector2(0.1f , bounds.size.y - 0.1f);
 
-        // Check if the area directly right of the player's hitbox is occupied by something in the groundlayer. Return true if yes, false if no.
-        return Physics2D.OverlapBox(wallBoxCenter, wallBoxSize, 0f, groundLayer) != null;
+        // Check if the area directly right of the player's hitbox is occupied by something in the ground layer. Return true if yes, false if no.
+        return Physics2D.OverlapBox(wallBoxCenter, wallBoxSize, 0f, groundLayer) is { };
     }
 
     private bool OnWallLeft()
@@ -114,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 wallBoxSize = new Vector2(0.1f , bounds.size.y - 0.1f);
 
-        // Check if the area directly left of the player's hitbox is occupied by something in the groundlayer. Return true if yes, false if no.
-        return Physics2D.OverlapBox(wallBoxCenter, wallBoxSize, 0f, groundLayer) != null;
+        // Check if the area directly left of the player's hitbox is occupied by something in the ground layer. Return true if yes, false if no.
+        return Physics2D.OverlapBox(wallBoxCenter, wallBoxSize, 0f, groundLayer) is { };
     }
 }
