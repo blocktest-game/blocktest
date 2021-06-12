@@ -24,7 +24,7 @@ public class SpriteAnimator : MonoBehaviour
 
     public void SetAnimation(SpriteSheet newSheet, float newTime = 0.1f)
     {
-        if (newSheet == spriteSheet) { return; }
+        if (newSheet.Equals(spriteSheet)) { return; }
         spriteRenderer.sprite = newSheet[0];
         currentSprite = 0;
         spriteSheet = newSheet;
