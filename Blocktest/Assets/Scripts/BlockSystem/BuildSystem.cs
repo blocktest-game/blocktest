@@ -140,7 +140,7 @@ namespace BlockSystem
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
-            if (!sourceBlock.blockSmoothing /*|| (sourceBlock.spriteSheet is null)*/) {
+            if (!sourceBlock.blockSmoothing || (sourceBlock.spriteSheet is null)) {
                 base.GetTileData(position, tilemap, ref tileData);
                 return;
             } // If the tile doesn't or can't smooth, don't even try
