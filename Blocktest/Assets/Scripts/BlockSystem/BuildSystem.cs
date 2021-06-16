@@ -160,7 +160,7 @@ namespace BlockSystem
                 bitmask += 8;
             }
 
-            sprite = sourceBlock.spriteSheet[sourceBlock.blockSprite.texture.name + "_" + bitmask];
+            sprite = sourceBlock.spriteSheet?[sourceBlock.blockSprite.texture.name + "_" + bitmask];
             base.GetTileData(position, tilemap, ref tileData);
         }
 

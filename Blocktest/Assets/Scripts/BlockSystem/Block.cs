@@ -23,7 +23,7 @@ namespace BlockSystem
         /// <summary> The sound that is played when the block is placed. </summary>
         public AudioClip placeSound;
         /// <summary> The sprite sheet used for smoothing the block. </summary>
-        public SpriteSheet spriteSheet;
+        public SpriteSheet? spriteSheet;
 
         /* METHODS */
 
@@ -42,7 +42,7 @@ namespace BlockSystem
             }
             if (!blockSmoothing) { return; }
             spriteSheet = new SpriteSheet(path);
-            if (spriteSheet.Length <= 1) {
+            if (spriteSheet?.Length <= 1) {
                 Debug.Log("Block " + this + " is marked as smoothable, but a sprite sheet could not be found at " + path + "!");
             }
         }
