@@ -1,5 +1,5 @@
 /// <summary> Stores information on an attacks effect on an attackable object </summary>
-struct Attack
+public struct Attack
 {
     /// <summary> Amount of damage dealt </summary>
     public int damage;
