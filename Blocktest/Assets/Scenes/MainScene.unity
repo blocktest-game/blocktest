@@ -1132,7 +1132,7 @@ MonoBehaviour:
   blockManager: {fileID: 1372863295}
   foregroundTilemap: {fileID: 1983780303}
   backgroundTilemap: {fileID: 1505424472}
-  characterPrefabFallback: {fileID: 3613805916922500989, guid: 4618fdaf1ab8b67418a5f9dc19c540ef, type: 3}
+  characterPrefabFallback: {fileID: 1956350414313404744, guid: c21abd77d91e313459f75d3b203f35cf, type: 3}
 --- !u!1 &1505424469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,8 +1202,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -389806435
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
